@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="1212,700" sizebox="4,4,6,6" caption="0,0,0,54">
+    <Font name="微软雅黑" id="0" size="14" bold="false" italic="false" />
+    <Include source="Common.xml" />
+	<VerticalLayout bordersize="1" bkcolor="#FFFFFFFF" bordercolor="#FF419BF9" inset="1,1,1,1">
+        <HorizontalLayout height="54" bkcolor="#FF60B7FF" bkcolor2="#FF4DA3FF">
+            <Control width="117" height="18" padding="24,18,0,0" bkimage="logo.png" />
+            <HorizontalLayout name="opt_container" height="54" padding="50,1,0,0">
+                <Option name="opt_home" text="主页" width="116" height="54" textcolor="#FFFFFFFF" font="0" pushedimage="tabbar_pushed.png" group="contenttab" selected="true" selectedimage="tabbar_pushed.png" />
+                <Option name="opt_room" text="房间列表" width="116" height="54" textcolor="#FFFFFFFF" font="0" pushedimage="tabbar_pushed.png" group="contenttab" selectedimage="tabbar_pushed.png" />
+                <Option name="opt_create_room" text="我要直播" width="116" height="54" textcolor="#FFFFFFFF" font="0" pushedimage="tabbar_pushed.png" group="contenttab" selectedimage="tabbar_pushed.png" />
+                <Option name="opt_device" text="设备调试" width="116" height="54" textcolor="#FFFFFFFF" font="0" pushedimage="tabbar_pushed.png" group="contenttab" selectedimage="tabbar_pushed.png" />
+                <Option name="opt_setting" text="设置" width="116" height="54" textcolor="#FFFFFFFF" font="0" pushedimage="tabbar_pushed.png" group="contenttab" selectedimage="tabbar_pushed.png" />
+            </HorizontalLayout>
+			<VerticalLayout width="150" height="54" padding="0,0,20,0" valign="vcenter">
+                 <Label text="" name="txt_userid" textcolor="#FFFFFFFF" height="28" align="left" valign="vcenter" font="0"/>
+			</VerticalLayout>
+            <HorizontalLayout width="46" height="54" padding="0,0,20,0">
+                <Button name="minbtn" width="19" height="19" padding="0,18,0,0" normalimage="file=&apos;frame_btn_min.png&apos; source=&apos;0,0,19,19&apos;" hotimage="file=&apos;frame_btn_min.png&apos; source=&apos;19,0,38,19&apos;" pushedimage="file=&apos;frame_btn_min.png&apos; source=&apos;38,0,57,19&apos;" disabledimage="file=&apos;frame_btn_min.png&apos; source=&apos;57,0,76,19&apos;" />
+                <Button name="closebtn" width="19" height="19" padding="8,18,0,0" normalimage="file=&apos;frame_btn_close.png&apos; source=&apos;0,0,19,19&apos; &apos;" hotimage="file=&apos;frame_btn_close.png&apos; source=&apos;19,0,38,19&apos;" pushedimage="file=&apos;frame_btn_close.png&apos; source=&apos;38,0,57,19&apos;" disabledimage="file=&apos;frame_btn_close.png&apos; source=&apos;57,0,76,19&apos;" />
+            </HorizontalLayout>
+        </HorizontalLayout>
+        <VerticalLayout padding="1,1,1,1">
+            <TabLayout name="tab_container">
+                <InteractHomePage />
+                <InteractRoomPage />
+                <InteractCreateRoomPage />
+                <InteractDevicePage />
+                <InteractSettingPage />
+            </TabLayout>
+        </VerticalLayout>
+    </VerticalLayout>
+</Window>

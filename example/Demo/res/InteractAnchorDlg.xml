@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="1212,700" sizebox="4,4,6,6" caption="0,0,0,54">
+    <Font name="微软雅黑" id="0" size="14" bold="false" italic="false" />
+	<Include source="Common.xml" />
+    <VerticalLayout bordersize="1" bkcolor="#FFFFFFFF" bordercolor="#00A0A0A4">
+        <HorizontalLayout height="54" bkcolor="#FF60B7FF" bkcolor2="#FF4DA3FF">
+            <Control width="117" height="18" padding="24,18,0,0" bkimage="logo.png" />
+            <HorizontalLayout height="54" padding="50,1,0,0" />
+            <HorizontalLayout width="46" height="54" padding="0,0,20,0">
+                <Button name="minbtn" width="19" height="19" padding="0,18,0,0" normalimage="file=&apos;frame_btn_min.png&apos; source=&apos;0,0,19,19&apos;" hotimage="file=&apos;frame_btn_min.png&apos; source=&apos;19,0,38,19&apos;" pushedimage="file=&apos;frame_btn_min.png&apos; source=&apos;38,0,57,19&apos;" disabledimage="file=&apos;frame_btn_min.png&apos; source=&apos;57,0,76,19&apos;" />
+                <Button name="closebtn" width="19" height="19" padding="8,18,0,0" normalimage="file=&apos;frame_btn_close.png&apos; source=&apos;0,0,19,19&apos; &apos;" hotimage="file=&apos;frame_btn_close.png&apos; source=&apos;19,0,38,19&apos;" pushedimage="file=&apos;frame_btn_close.png&apos; source=&apos;38,0,57,19&apos;" disabledimage="file=&apos;frame_btn_close.png&apos; source=&apos;57,0,76,19&apos;" />
+            </HorizontalLayout>
+        </HorizontalLayout>
+        <HorizontalLayout>
+            <VerticalLayout width="470" padding="1,1,1,1">
+                <InteractInfoPanel />
+            </VerticalLayout>
+            <VerticalLayout width="510" name="layout_video">
+                <HorizontalLayout height="431">
+                    <Window name="videoSub0" padding="0, 0, 1, 1" />
+                    <VerticalLayout width="170">
+                        <Window name="videoSub1" padding="0, 0, 0, 1" />
+                        <Window name="videoSub2" padding="0, 0, 0, 1" />
+                    </VerticalLayout>
+                </HorizontalLayout>
+                <Control width="2" />
+                <HorizontalLayout height="215">
+                    <Window name="videoSub3" padding="0, 0, 0, 0" />
+                    <Window name="videoSub4" padding="1, 0, 1, 0" />
+                    <Window name="videoSub5" padding="0, 0, 0, 0" />
+                </HorizontalLayout>
+            </VerticalLayout>
+			<VerticalLayout width="516" name="layout_audio" visible="false">
+				<TileLayout name="list_audio_broadcaster" vscrollbar="true" itemsize="170,170" childvpadding="1" childpadding="1"/>
+			</VerticalLayout>
+            <VerticalLayout padding="10,1,1,1">
+                <List name="list_log" vscrollbar="true" header="hidden">
+                    <ListHeader>
+                        <ListHeaderItem />
+                    </ListHeader>
+                </List>
+            </VerticalLayout>
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>

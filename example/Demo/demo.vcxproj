@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1A9C8BFF-93DA-4F86-AC4A-48D5956D7BD5}</ProjectGuid>
+    <ProjectName>Demo</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath);$(SolutionDir)/WTL91_5321_Final\Include;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath);$(SolutionDir)/WTL91_5321_Final\Include;</IncludePath>
+    <TargetName>360VideoCloud</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Demo;$(SolutionDir)Tools/Api;$(SolutionDir)Interact/Api;$(SolutionDir)../sdk/include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)../sdk/lib;$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CommonLib.lib;qhvc_interact.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>Demo.h</HeaderFileName>
+      <InterfaceIdentifierFileName>demo_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>demo_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/demo.tlb</TypeLibraryName>
+      <DllDataFileName />
+    </Midl>
+    <PostBuildEvent>
+      <Command>xcopy /s /y $(ProjectDir)Run $(SolutionDir)$(Configuration)\
+xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling />
+      <DebugInformationFormat />
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Demo;$(SolutionDir)Tools/Api;$(SolutionDir)Interact/Api;$(SolutionDir)../sdk/include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>CommonLib.lib;qhvc_interact.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)../sdk/lib;$(OutDir)</AdditionalLibraryDirectories>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>Demo.h</HeaderFileName>
+      <InterfaceIdentifierFileName>demo_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>demo_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/demo.tlb</TypeLibraryName>
+      <DllDataFileName />
+    </Midl>
+    <PostBuildEvent>
+      <Command>xcopy /s /y $(ProjectDir)Run $(SolutionDir)$(Configuration)\
+xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Common\Crash.cpp" />
+    <ClCompile Include="Demo.cpp" />
+    <ClCompile Include="Interact\IM\InteractImManager.cpp" />
+    <ClCompile Include="Interact\IM\RongCloudServerApi.cpp" />
+    <ClCompile Include="Interact\IM\RongCloudApi.cpp" />
+    <ClCompile Include="Interact\InteractGlobalManager.cpp" />
+    <ClCompile Include="Interact\InteractSetting.cpp" />
+    <ClCompile Include="Interact\Net\InteractServerApi.cpp" />
+    <ClCompile Include="Interact\UI\Control\videolayer.cpp" />
+    <ClCompile Include="Interact\UI\Control\VideoWnd.cpp" />
+    <ClCompile Include="Interact\UI\InteractAnchorDlg.cpp" />
+    <ClCompile Include="Interact\UI\InteractCreateRoomPage.cpp" />
+    <ClCompile Include="Interact\UI\InteractDevicePage.cpp" />
+    <ClCompile Include="Interact\UI\InteractHomePage.cpp" />
+    <ClCompile Include="Interact\UI\InteractInfoPanel.cpp" />
+    <ClCompile Include="Interact\UI\InteractMainDlg.cpp" />
+    <ClCompile Include="Interact\UI\InteractRoomPage.cpp" />
+    <ClCompile Include="Interact\UI\InteractSettingPage.cpp" />
+    <ClCompile Include="Interact\UI\Toast.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="UI\Core\Control\UIWindow.cpp" />
+    <ClCompile Include="UI\Core\MessageBox.cpp" />
+    <ClCompile Include="UI\MainWnd.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\Crash.h" />
+    <ClInclude Include="Constant.h" />
+    <ClInclude Include="Demo.h" />
+    <ClInclude Include="Interact\IM\InteractImManager.h" />
+    <ClInclude Include="Interact\IM\RongCloudServerApi.h" />
+    <ClInclude Include="Interact\IM\RongCloudApi.h" />
+    <ClInclude Include="Interact\InteractConfig.h" />
+    <ClInclude Include="Interact\InteractGlobalManager.h" />
+    <ClInclude Include="Interact\InteractSetting.h" />
+    <ClInclude Include="Interact\ModelDef.h" />
+    <ClInclude Include="Interact\Net\InteractServerApi.h" />
+    <ClInclude Include="Interact\UI\Control\VideoLayer.h" />
+    <ClInclude Include="Interact\UI\Control\VideoWnd.h" />
+    <ClInclude Include="Interact\UI\InteractAnchorDlg.h" />
+    <ClInclude Include="Interact\UI\InteractCreateRoomPage.h" />
+    <ClInclude Include="Interact\UI\InteractDevicePage.h" />
+    <ClInclude Include="Interact\UI\InteractHomePage.h" />
+    <ClInclude Include="Interact\UI\InteractInfoPanel.h" />
+    <ClInclude Include="Interact\UI\InteractMainDlg.h" />
+    <ClInclude Include="Interact\UI\InteractRoomPage.h" />
+    <ClInclude Include="Interact\UI\InteractSettingPage.h" />
+    <ClInclude Include="Interact\UI\InteractUIConstant.h" />
+    <ClInclude Include="Interact\UI\Toast.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="UI\Core\ChildWindowImpl.h" />
+    <ClInclude Include="UI\Core\Control\UIWindow.h" />
+    <ClInclude Include="UI\Core\DialogImpl.h" />
+    <ClInclude Include="UI\Core\MessageBox.h" />
+    <ClInclude Include="UI\Core\WindowImpl.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIActiveX.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIButton.h" />
+    <ClInclude Include="UI\Inlcude\Control\UICheckBox.h" />
+    <ClInclude Include="UI\Inlcude\Control\UICombo.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIDateTime.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIEdit.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIFlash.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIGifAnim.h" />
+    <ClInclude Include="UI\Inlcude\Control\UILabel.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIList.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIOption.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIProgress.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIRichEdit.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIScrollBar.h" />
+    <ClInclude Include="UI\Inlcude\Control\UISlider.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIText.h" />
+    <ClInclude Include="UI\Inlcude\Control\UITreeView.h" />
+    <ClInclude Include="UI\Inlcude\Control\UIWebBrowser.h" />
+    <ClInclude Include="UI\Inlcude\Core\UIBase.h" />
+    <ClInclude Include="UI\Inlcude\Core\UIContainer.h" />
+    <ClInclude Include="UI\Inlcude\Core\UIControl.h" />
+    <ClInclude Include="UI\Inlcude\Core\UIDefine.h" />
+    <ClInclude Include="UI\Inlcude\Core\UIDlgBuilder.h" />
+    <ClInclude Include="UI\Inlcude\Core\UIManager.h" />
+    <ClInclude Include="UI\Inlcude\Core\UIMarkup.h" />
+    <ClInclude Include="UI\Inlcude\Core\UIRender.h" />
+    <ClInclude Include="UI\Inlcude\Layout\UIChildLayout.h" />
+    <ClInclude Include="UI\Inlcude\Layout\UIHorizontalLayout.h" />
+    <ClInclude Include="UI\Inlcude\Layout\UITabLayout.h" />
+    <ClInclude Include="UI\Inlcude\Layout\UITileLayout.h" />
+    <ClInclude Include="UI\Inlcude\Layout\UIVerticalLayout.h" />
+    <ClInclude Include="UI\Inlcude\UIlib.h" />
+    <ClInclude Include="UI\Inlcude\Utils\downloadmgr.h" />
+    <ClInclude Include="UI\Inlcude\Utils\FlashEventHandler.h" />
+    <ClInclude Include="UI\Inlcude\Utils\stb_image.h" />
+    <ClInclude Include="UI\Inlcude\Utils\UIDelegate.h" />
+    <ClInclude Include="UI\Inlcude\Utils\Utils.h" />
+    <ClInclude Include="UI\Inlcude\Utils\WebBrowserEventHandler.h" />
+    <ClInclude Include="UI\Inlcude\Utils\WinImplBase.h" />
+    <ClInclude Include="UI\Inlcude\Utils\WndShadow.h" />
+    <ClInclude Include="UI\MainWnd.h" />
+    <ClInclude Include="UI\UI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="demo.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UI\Inlcude\Utils\flash11.tlh" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

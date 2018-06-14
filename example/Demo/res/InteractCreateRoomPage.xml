@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="800,600">
+    <Font name="微软雅黑" id="0" size="14" bold="false" italic="false" />
+	<Font name="微软雅黑" id="1" size="24" bold="false" italic="false" />
+    <Include source="Common.xml" />
+	<HorizontalLayout align="center" bkcolor="#FFFFFFFF">
+		<VerticalLayout bordersize="1" width="330">
+			<Control height="105"/>
+			<Label text="创建房间" height="30" align="center" valign="vcenter" textcolor="#FF4DA3FF" font="1"/>
+			<Control height="22"/>
+			<Control height="1" bkcolor="#FFD8DAE5" />
+			<Control height="42"/>
+			<HorizontalLayout height="28" align="center">
+				<HorizontalLayout width="199" height="28">
+					<Option name="opt_room_all" text="视频" textpadding="0,2,0,2" textcolor="#FF666666" font="0" normalimage="file=&apos;select_right.png&apos; source=&apos;0,0,99,28&apos;" group="room_type" selected="true" selectedimage="file=&apos;select_left.png&apos; source=&apos;0,0,100,28&apos;" selectedtextcolor="#FF4DA3FF"/>
+					<Option name="opt_room_audio_only" text="语音" textpadding="0,2,0,2" textcolor="#FF666666" font="0" normalimage="file=&apos;select_left.png&apos; source=&apos;100,0,199,28&apos;" group="room_type" selectedimage="file=&apos;select_right.png&apos; source=&apos;99,0,199,28&apos;" selectedtextcolor="#FF4DA3FF"/>
+				</HorizontalLayout>
+			</HorizontalLayout>
+			<Control height="45"/>
+			<HorizontalLayout height="150" padding="0,0,0,0">
+				<VerticalLayout width="70">
+					<Label text="房间名称：" height="28" align="left" valign="vcenter" />
+					<Label text="互动模式：" height="28" padding="0,12,0,0" align="left" valign="vcenter" />
+					<Label text="互动上限：" height="28" padding="0,12,0,0" align="left" valign="vcenter" />
+				</VerticalLayout>
+				<VerticalLayout>
+					<Edit name="edt_room_name" tooltip="房间名称" bordersize="1" height="28"/>
+					<Combo name="cmb_room_mode" height="28" padding="0,12,0,0" />
+					<Edit name="edt_room_max" text="6" tooltip="房间最大人数" bordersize="1" height="28" padding="0,12,0,0" />
+				</VerticalLayout>
+			</HorizontalLayout>
+			<VerticalLayout valign="vcenter">
+				<HorizontalLayout align="center">
+					<Button name="btn_create_room" text="立即创建" height="40" />
+				</HorizontalLayout>
+			</VerticalLayout>
+		</VerticalLayout>
+	</HorizontalLayout>
+</Window>

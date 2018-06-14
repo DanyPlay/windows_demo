@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<DirectUIProject Name="Res" Version="2015.10.29">
+    <File Name="MainWnd.xml" />
+    <File Name="MessageBox.xml" />
+    <Directory Name="Interact">
+        <File Name="InteractMainDlg.xml" />
+        <File Name="InteractHomePage.xml" />
+        <File Name="InteractRoomPage.xml" />
+        <File Name="InteractCreateRoomPage.xml" />
+        <File Name="InteractDevicePage.xml" />
+        <File Name="InteractSettingPage.xml" />
+        <File Name="InteractAnchorDlg.xml" />
+        <File Name="VideoLayer.xml" />
+        <File Name="InteractInfoPanel.xml" />
+        <File Name="RoomItem.xml" />
+		<File Name="AudioItem.xml" />
+    </Directory>
+    <Directory Name="Common">
+        <File Name="SysComand.xml" />
+        <File Name="Common.xml" />
+    </Directory>
+</DirectUIProject>

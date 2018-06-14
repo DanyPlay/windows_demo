@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="http">
+      <UniqueIdentifier>{83c86c73-3494-48ec-a1a0-c127f86101b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json">
+      <UniqueIdentifier>{73401636-10bc-46ce-b3b0-326b8051c03e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="md5">
+      <UniqueIdentifier>{52c7811e-3fb2-488a-8880-66057f9bb44f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{14d92045-5297-409a-9dc6-818535fbe37f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SHA1">
+      <UniqueIdentifier>{da136d99-e2d2-4d2f-83f9-17615b005d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base64">
+      <UniqueIdentifier>{f4954f4c-8c4a-403d-8fe9-d251a8881e8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{3e9b38cd-bd9f-44e3-8526-bc4ff9324593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{cd7c849d-8b90-4351-ad26-e203f90a8936}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aes">
+      <UniqueIdentifier>{02a7a977-aaa5-48c4-b926-2380afc9bbd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tstring">
+      <UniqueIdentifier>{91bc2c2e-d7d3-4606-a8e2-9d871972bf30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\autolink.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\config.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\features.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\forwards.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json_batchallocator.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\reader.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\value.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\writer.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="http\http_request.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="http\http_request_manager.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="md5\md5.h">
+      <Filter>md5</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Util.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="SHA1\sha1.hpp">
+      <Filter>SHA1</Filter>
+    </ClInclude>
+    <ClInclude Include="Base64\base64.h">
+      <Filter>Base64</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread\ThreadLock.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Log\Log.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="aes\aes.h">
+      <Filter>aes</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread\ThreadJob.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread\AtomicBoolean.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="string\tstring.h">
+      <Filter>tstring</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="json\json_reader.cpp">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="json\json_value.cpp">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="json\json_writer.cpp">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="md5\md5.cpp">
+      <Filter>md5</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Util.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="SHA1\sha1.cpp">
+      <Filter>SHA1</Filter>
+    </ClCompile>
+    <ClCompile Include="Base64\base64.cpp">
+      <Filter>Base64</Filter>
+    </ClCompile>
+    <ClCompile Include="Log\Log.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="aes\aes.c">
+      <Filter>aes</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread\ThreadJob.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread\AtomicBoolean.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="json\json_internalarray.inl">
+      <Filter>json</Filter>
+    </None>
+    <None Include="json\json_internalmap.inl">
+      <Filter>json</Filter>
+    </None>
+    <None Include="json\json_valueiterator.inl">
+      <Filter>json</Filter>
+    </None>
+    <None Include="http\http_request_header.inl">
+      <Filter>http</Filter>
+    </None>
+    <None Include="http\http_request_inner.inl">
+      <Filter>http</Filter>
+    </None>
+    <None Include="http\http_response_info.inl">
+      <Filter>http</Filter>
+    </None>
+  </ItemGroup>
+</Project>

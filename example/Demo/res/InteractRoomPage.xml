@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="800,600">
+    <Font name="微软雅黑" id="0" size="14" bold="false" italic="false" />
+    <Include source="Common.xml" />
+	<VerticalLayout bkcolor="#FFFFFFFF">
+        <HorizontalLayout name="layout_opt" height="68" bkcolor="#FFF1F3F8">
+            <Label text="互动模式" width="53" height="13" padding="20,28,0,0" align="left" valign="vcenter" />
+            <Combo name="cmb_mode" width="187" height="28" padding="10,20,0,0" />
+            <Label text="指定房间" width="53" height="13" padding="20,28,0,0" align="left" valign="vcenter" />
+            <Edit name="edt_search" tooltip="房间ID" bordersize="1" width="187" height="28" padding="10,20,0,0" />
+            <Button name="btn_search" text="进入" width="86" height="28" padding="10,20,0,0" />
+            <Control />
+            <Button name="btn_refresh" width="49" height="28" padding="0,20,20,0" normalimage="file=&apos;button2_nor.png&apos; fade=&apos;200&apos;" hotimage="file=&apos;button2_over.png&apos; fade=&apos;200&apos;" pushedimage="file=&apos;button2_down.png&apos; fade=&apos;200&apos;" foreimage="file=&apos;refresh.png&apos; dest=&apos;18,7,32,21&apos;" />
+        </HorizontalLayout>
+        <VerticalLayout name="layout_list" padding="20,20,20,0">
+            <TileLayout name="list_room" vscrollbar="true" itemsize="278,185" childvpadding="20" />
+        </VerticalLayout>
+    </VerticalLayout>
+</Window>

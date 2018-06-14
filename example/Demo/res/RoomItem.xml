@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window>
+    <VerticalLayout width="278" height="185">
+        <VerticalLayout bkimage="file=&apos;bg_room_item.png&apos;" valign="vcenter">
+            <Label name="txt_title" mouse="false" textcolor="#FFFFFFFF" align="center" valign="vcenter" />
+            <Label name="txt_type" mouse="false" textcolor="#FFAAAAAA" align="center" valign="vcenter" />
+        </VerticalLayout>
+        <HorizontalLayout name="layout_info" height="30">
+            <Label text="ID:" width="25" mouse="false" textcolor="#FF666666" align="left" valign="vcenter" />
+            <Label name="txt_id" mouse="false" textcolor="#FF666666" align="left" valign="vcenter" />
+            <Label text="人数：" width="40" mouse="false" textcolor="#FF666666" align="left" valign="vcenter" />
+            <Label name="txt_num" width="40" mouse="false" textcolor="#FF666666" align="right" valign="vcenter" />
+        </HorizontalLayout>
+        <Button name="btn_room_item" float="true" pos="0,0,0,0" width="278" height="185" textcolor="#FF666666" />
+    </VerticalLayout>
+</Window>

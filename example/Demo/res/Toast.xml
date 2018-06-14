@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="200,54" layeredimage="trans.png">
+    <Font name="微软雅黑" id="0" size="14" bold="false" italic="false" />
+    <VerticalLayout  bkcolor="#FF000000">
+        <VerticalLayout  height="54" valign="vcenter" bkimage="file=&apos;toast.png&apos; corner=&apos;10,10,10,10&apos;" >
+			<Label name="txt_toast" padding="10,0,10,0" height="25" textcolor="#F0FFFFFF" align="left" valign="vcenter" enabledeffect="true" />
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

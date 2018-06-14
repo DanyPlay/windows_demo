@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="800,600">
+    <Font name="微软雅黑" id="0" size="14" bold="false" italic="false" />
+	<Font name="微软雅黑" id="1" size="24" bold="false" italic="false" />
+    <Include source="Common.xml" />
+    <HorizontalLayout bkcolor="#FFFFFFFF" align="center">
+        <VerticalLayout bordersize="1" width="516" height="387" padding="0,128,0,0" bkimage="bg_login.png">
+			<Control height="80"/>
+			<HorizontalLayout align="center">
+				<VerticalLayout width="342" >
+					<HorizontalLayout height="205">
+						<VerticalLayout>
+							<Label text="业务标识" height="28" align="left" valign="vcenter" />
+							<Label text="渠道标识" height="28" padding="0,16,0,0" align="left" valign="vcenter" />
+							<Label text="AppKey" height="28" padding="0,16,0,0" align="left" valign="vcenter" />
+							<Label text="AppSecret" height="28" padding="0,16,0,0" align="left" valign="vcenter" />
+							<Label text="用户ID" height="28" padding="0,16,0,0" align="left" valign="vcenter" />
+						</VerticalLayout>
+						<VerticalLayout width="258">
+							<Edit name="edt_bid" text="demo" tooltip="业务标识" bordersize="1" height="28" />
+							<Edit name="edt_cid" text="test_waterbear_mic" tooltip="渠道标识" bordersize="1" height="28" padding="0,16,0,0" />
+							<Edit name="edt_appkey" tooltip="业务AppKey" bordersize="1" height="28" padding="0,16,0,0" />
+							<Edit name="edt_appsecret" tooltip="业务Secret" bordersize="1" height="28" padding="0,16,0,0" />
+							<Edit name="edt_uid" tooltip="用户标识" enabled="false" bordersize="1" height="28" padding="0,16,0,0" />
+						</VerticalLayout>
+					</HorizontalLayout>
+					<VerticalLayout name="layout_login" valign="vcenter">
+						<HorizontalLayout height="40" align="center">
+							<Button name="btn_login" text="立即登录" />
+						</HorizontalLayout>
+					</VerticalLayout>
+				</VerticalLayout>
+			</HorizontalLayout>
+        </VerticalLayout>
+		<HorizontalLayout width="180" ="41" float="true" pos="525,108,705,149">
+			<Label width="41" height="41" bkimage="icon_interact.png"/>
+			<Label text="互动直播" align="center" valign="vcenter" textcolor="#FF4DA3FF" font="1"/>
+		</HorizontalLayout>		
+    </HorizontalLayout>
+</Window>

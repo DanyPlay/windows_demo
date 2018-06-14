@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="800,600">
+    <Font name="微软雅黑" id="0" size="14" bold="false" italic="false" />
+    <Include source="Common.xml" />
+	<VerticalLayout bkcolor="#FFFFFFFF" valign="vcenter">
+        <HorizontalLayout height="50" align="center">
+            <Label text="敬请期待..." width="180" height="30" align="center" valign="vcenter" />
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>

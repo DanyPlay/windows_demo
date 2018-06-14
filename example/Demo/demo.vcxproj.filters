@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6e712704-f8f4-4033-a386-056d84d77f56}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{d443df2e-cb9d-42ca-8b92-7e549ac6521c}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{c79d75ca-29f6-44db-9aca-98ec79349aed}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{91e70fa3-751c-4fa9-a94d-f2b5f11ea32a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Core">
+      <UniqueIdentifier>{feb0d639-e83f-4674-8f9f-849e5e1303a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Include">
+      <UniqueIdentifier>{82cfc0fe-706a-46cc-878b-688e7ee07e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Include\Control">
+      <UniqueIdentifier>{eda5ecf5-ecf2-4cd7-908d-8c57211a4fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Include\Core">
+      <UniqueIdentifier>{fc2b678d-3eb0-45e4-a13d-c30e001f56b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Include\Layout">
+      <UniqueIdentifier>{eec63170-cf25-48d7-8b53-f3467ece6e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Include\Utils">
+      <UniqueIdentifier>{c8909f42-58fc-45a8-8f45-2b39d7cbe247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interact">
+      <UniqueIdentifier>{cc1328be-094f-4a26-be14-4196d76159a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interact\UI">
+      <UniqueIdentifier>{cb3b7578-a7d7-4fb6-b017-10ef11fefc11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interact\Net">
+      <UniqueIdentifier>{42d9877e-4d93-4788-88a2-5bfd00cd1700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Core\Control">
+      <UniqueIdentifier>{54d65302-cdb5-4743-a29b-00cb249c3aff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interact\UI\Control">
+      <UniqueIdentifier>{2a71afc2-56ed-4db2-91ca-a70ade318821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interact\IM">
+      <UniqueIdentifier>{e215e653-3627-44e8-b8bb-3ec28a0838c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{41d31d95-1fab-40ae-9f1c-609d13b7dc08}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\MainWnd.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Core\MessageBox.cpp">
+      <Filter>UI\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\InteractGlobalManager.cpp">
+      <Filter>Interact</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\Net\InteractServerApi.cpp">
+      <Filter>Interact\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\InteractAnchorDlg.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\Control\VideoWnd.cpp">
+      <Filter>Interact\UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Core\Control\UIWindow.cpp">
+      <Filter>UI\Core\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\IM\RongCloudApi.cpp">
+      <Filter>Interact\IM</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\IM\RongCloudServerApi.cpp">
+      <Filter>Interact\IM</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\IM\InteractImManager.cpp">
+      <Filter>Interact\IM</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\InteractHomePage.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\InteractMainDlg.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\InteractRoomPage.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\InteractCreateRoomPage.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\Control\videolayer.cpp">
+      <Filter>Interact\UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\InteractSettingPage.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\InteractInfoPanel.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\InteractDevicePage.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\InteractSetting.cpp">
+      <Filter>Interact</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Crash.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\UI\Toast.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\MainWnd.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Core\DialogImpl.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Core\MessageBox.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Core\WindowImpl.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIActiveX.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIButton.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UICheckBox.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UICombo.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIDateTime.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIEdit.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIFlash.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIGifAnim.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UILabel.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIList.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIOption.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIProgress.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIRichEdit.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIScrollBar.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UISlider.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIText.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UITreeView.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Control\UIWebBrowser.h">
+      <Filter>UI\Include\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Core\UIBase.h">
+      <Filter>UI\Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Core\UIContainer.h">
+      <Filter>UI\Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Core\UIControl.h">
+      <Filter>UI\Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Core\UIDefine.h">
+      <Filter>UI\Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Core\UIDlgBuilder.h">
+      <Filter>UI\Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Core\UIManager.h">
+      <Filter>UI\Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Core\UIMarkup.h">
+      <Filter>UI\Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Core\UIRender.h">
+      <Filter>UI\Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Layout\UIChildLayout.h">
+      <Filter>UI\Include\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Layout\UIHorizontalLayout.h">
+      <Filter>UI\Include\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Layout\UITabLayout.h">
+      <Filter>UI\Include\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Layout\UITileLayout.h">
+      <Filter>UI\Include\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Layout\UIVerticalLayout.h">
+      <Filter>UI\Include\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Utils\downloadmgr.h">
+      <Filter>UI\Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Utils\FlashEventHandler.h">
+      <Filter>UI\Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Utils\stb_image.h">
+      <Filter>UI\Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Utils\UIDelegate.h">
+      <Filter>UI\Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Utils\Utils.h">
+      <Filter>UI\Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Utils\WebBrowserEventHandler.h">
+      <Filter>UI\Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Utils\WinImplBase.h">
+      <Filter>UI\Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\Utils\WndShadow.h">
+      <Filter>UI\Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inlcude\UIlib.h">
+      <Filter>UI\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\InteractGlobalManager.h">
+      <Filter>Interact</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\Net\InteractServerApi.h">
+      <Filter>Interact\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractAnchorDlg.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\Control\VideoWnd.h">
+      <Filter>Interact\UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Core\Control\UIWindow.h">
+      <Filter>UI\Core\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\IM\RongCloudApi.h">
+      <Filter>Interact\IM</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\IM\RongCloudServerApi.h">
+      <Filter>Interact\IM</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\ModelDef.h">
+      <Filter>Interact</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\IM\InteractImManager.h">
+      <Filter>Interact\IM</Filter>
+    </ClInclude>
+    <ClInclude Include="Constant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Core\ChildWindowImpl.h">
+      <Filter>UI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractHomePage.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractMainDlg.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractRoomPage.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractUIConstant.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractCreateRoomPage.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\Control\VideoLayer.h">
+      <Filter>Interact\UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractDevicePage.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractSettingPage.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractInfoPanel.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\InteractSetting.h">
+      <Filter>Interact</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Crash.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\Toast.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\InteractConfig.h">
+      <Filter>Interact</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="demo.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UI\Inlcude\Utils\flash11.tlh">
+      <Filter>UI\Include\Utils</Filter>
+    </None>
+  </ItemGroup>
+</Project>
