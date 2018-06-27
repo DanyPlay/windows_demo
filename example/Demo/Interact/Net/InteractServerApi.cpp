@@ -4,11 +4,7 @@
 
 #include "../InteractGlobalManager.h"
 
-#ifdef _DEBUG
-static std::string  HOST = "http://k0106v.add.lfyc.qihoo.net:9908/api";
-#else
 static std::string  HOST = "http://livedemo.vcloud.360.cn/api";
-#endif
 
 bool SortUserModel(const InteractUserModel &v1, const InteractUserModel &v2)//注意：本函数的参数的类型一定要与vector中元素的类型一致
 {

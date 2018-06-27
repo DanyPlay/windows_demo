@@ -30,11 +30,7 @@ public:
 template<class T>
 UILIB_RESOURCETYPE CDuiWindowImpl<T>::GetResourceType() const
 {
-#ifdef DEBUG
     return UILIB_FILE;
-#else
-    return UILIB_ZIP;
-#endif
 }
 
 template<class T>
