@@ -20,7 +20,7 @@ int Run(HINSTANCE hInstance, LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_S
     CCrash::Init();
 
     CLog::GetInstance().SetEnable(true);
-    CLog::GetInstance().SetLogLevel(LOG_LEVEL_DEBUG);
+    CLog::GetInstance().SetLogLevel(LOG_LEVEL_TRACE);
 
     CPaintManagerUI::SetInstance(hInstance);
 

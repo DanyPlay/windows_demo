@@ -64,5 +64,7 @@ private:
     InteractUserModel mInteractUserModel;
 
     HWND m_hMainWindow;
+
+    tstring m_strDeviceId;
 };
 

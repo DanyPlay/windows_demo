@@ -3,8 +3,12 @@
 #include "../../CommonLib/md5/md5.h"
 
 #include "../InteractGlobalManager.h"
+#include <io.h>
 
 static std::string  HOST = "http://livedemo.vcloud.360.cn/api";
+
+static std::string  HOST_DEBUG = "http://k0106v.add.lfyc.qihoo.net:9908/api";
+static std::string  HOST_RELEASE = "http://livedemo.vcloud.360.cn/api";
 
 bool SortUserModel(const InteractUserModel &v1, const InteractUserModel &v2)//注意：本函数的参数的类型一定要与vector中元素的类型一致
 {
@@ -13,6 +17,15 @@ bool SortUserModel(const InteractUserModel &v1, const InteractUserModel &v2)//注
 
 InteractServerApi::InteractServerApi()
 {
+    char path[512] = { 0 };
+    GetModuleFileNameA(NULL, path, 511);
+    std::string module_path = path;
+    std::string debug_path = module_path.substr(0, module_path.rfind("\\") + 1);
+    debug_path.append("debug.ini");
+
+    if (_access(debug_path.c_str(), 0) == 0) {
+        HOST = HOST_DEBUG;
+    }
 }
 
 
@@ -362,6 +375,13 @@ bool InteractServerApi::ParseInteractRoomModel(const Json::Value& jsonValue, Int
         }
         if (!jsonValue["createTime"].empty()){
             roomModel.createTime = STR2T(jsonValue["createTime"].asString());
+        }
+
+        if (!jsonValue["identity"].empty()){
+            int identity = atoi(jsonValue["identity"].asCString());
+            if (identity == InteractConstant::USER_IDENTITY_ANCHOR || identity == InteractConstant::USER_IDENTITY_GUEST || identity == InteractConstant::USER_IDENTITY_AUDIENCE) {
+                roomModel.userIdentity = (InteractConstant::USER_IDENTITY)identity;
+            }
         }
 
         if (!jsonValue["list"].empty() && jsonValue["list"].isArray()){

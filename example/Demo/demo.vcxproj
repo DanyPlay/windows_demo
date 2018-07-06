@@ -137,6 +137,7 @@ xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
   <ItemGroup>
     <ClCompile Include="Common\Crash.cpp" />
     <ClCompile Include="Demo.cpp" />
+    <ClCompile Include="Interact\DebugSetting.cpp" />
     <ClCompile Include="Interact\IM\InteractImManager.cpp" />
     <ClCompile Include="Interact\IM\RongCloudServerApi.cpp" />
     <ClCompile Include="Interact\IM\RongCloudApi.cpp" />
@@ -153,6 +154,7 @@ xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
     <ClCompile Include="Interact\UI\InteractMainDlg.cpp" />
     <ClCompile Include="Interact\UI\InteractRoomPage.cpp" />
     <ClCompile Include="Interact\UI\InteractSettingPage.cpp" />
+    <ClCompile Include="Interact\UI\InteractTestDlg.cpp" />
     <ClCompile Include="Interact\UI\Toast.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -166,6 +168,7 @@ xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
     <ClInclude Include="Common\Crash.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="Demo.h" />
+    <ClInclude Include="Interact\DebugSetting.h" />
     <ClInclude Include="Interact\IM\InteractImManager.h" />
     <ClInclude Include="Interact\IM\RongCloudServerApi.h" />
     <ClInclude Include="Interact\IM\RongCloudApi.h" />
@@ -184,6 +187,7 @@ xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
     <ClInclude Include="Interact\UI\InteractMainDlg.h" />
     <ClInclude Include="Interact\UI\InteractRoomPage.h" />
     <ClInclude Include="Interact\UI\InteractSettingPage.h" />
+    <ClInclude Include="Interact\UI\InteractTestDlg.h" />
     <ClInclude Include="Interact\UI\InteractUIConstant.h" />
     <ClInclude Include="Interact\UI\Toast.h" />
     <ClInclude Include="resource.h" />

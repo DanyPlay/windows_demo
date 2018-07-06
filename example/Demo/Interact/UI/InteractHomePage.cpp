@@ -4,6 +4,7 @@
 #include "../IM/InteractImManager.h"
 #include "../Net/InteractServerApi.h"
 #include "../../CommonLib/md5/md5.h"
+#include "../InteractSetting.h"
 
 
 DUI_BEGIN_MESSAGE_MAP(CInteractHomePage, CDuiDialogImpl<CInteractHomePage>)
@@ -33,10 +34,10 @@ LRESULT CInteractHomePage::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOO
     m_pEdtAppSecret = static_cast<CEditUI*>(FindControl(_T("edt_appsecret")));
     m_pEdtUid = static_cast<CEditUI*>(FindControl(_T("edt_uid")));
 
-    m_pEdtBid->SetText(InteractConstant::AppConfig::APP_BID.c_str());
-    m_pEdtCid->SetText(InteractConstant::AppConfig::APP_CID.c_str());
-    m_pEdtAppKey->SetText(InteractConstant::AppConfig::APP_KEY.c_str());
-    m_pEdtAppSecret->SetText(InteractConstant::AppConfig::APP_SCREAT_KEY.c_str());
+    m_pEdtBid->SetText(InteractSetting::GetInstance().GetBid().c_str());
+    m_pEdtCid->SetText(InteractSetting::GetInstance().GetCid().c_str());
+    m_pEdtAppKey->SetText(InteractSetting::GetInstance().GetAppKey().c_str());
+    m_pEdtAppSecret->SetText(InteractSetting::GetInstance().GetAppSecret().c_str());
 
     m_pLayoutLogin = static_cast<CContainerUI*>(FindControl(_T("layout_login")));
 
@@ -109,6 +110,11 @@ void CInteractHomePage::OnLoginClick()
         return;
     }
 
+    InteractSetting::GetInstance().SetBid((LPCTSTR)strBid);
+    InteractSetting::GetInstance().SetCid((LPCTSTR)strCid);
+    InteractSetting::GetInstance().SetAppKey((LPCTSTR)strAppKey);
+    InteractSetting::GetInstance().SetAppSecret((LPCTSTR)strAppSecret);
+
     InteractGlobalManager::GetInstance().SetBusinessId(strBid.GetData());
     InteractGlobalManager::GetInstance().SetChannelId(strCid.GetData());
 
@@ -136,7 +142,7 @@ void CInteractHomePage::OnServerApiUserLoginResult(const InteractServerApiRet& r
         ::PathAppendA(szPath, APP_DIR_ROOT);
         ::PathAddBackslashA(szPath);
 
-        QHVC::QHVCSdk::SetLogLevel(QHVC::QHVCSdk::LOG_LEVEL_DEBUG);
+        QHVC::QHVCSdk::SetLogLevel(QHVC::QHVCSdk::LOG_LEVEL_TRACE);
 
         QHVC::QHVCSdk::QHVCSdkConfig sdkConfig;
         _snprintf_s(sdkConfig.szMachineId, ARRAYSIZE(sdkConfig.szMachineId), _TRUNCATE, "%s", STR2A(InteractGlobalManager::GetInstance().GetDeviceId()).c_str());

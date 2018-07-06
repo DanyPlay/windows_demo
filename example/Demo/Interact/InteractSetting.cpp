@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "InteractSetting.h"
+#include "InteractConfig.h"
 
 
 InteractSetting::InteractSetting()
@@ -125,4 +126,42 @@ int InteractSetting::GetBitrate(InteractConstant::USER_IDENTITY enIdentity, int 
 void InteractSetting::SetBitrate(InteractConstant::USER_IDENTITY enIdentity, int nBitrate)
 {
     Write(GetUserIdentityTag(enIdentity).c_str(), _T("bitrate"), nBitrate);
+}
+
+tstring InteractSetting::GetBid()
+{
+    return Read(_T("app_info"), _T("app_bid"), InteractConstant::AppConfig::APP_BID.c_str());
+}
+
+void InteractSetting::SetBid(const tstring& strBid)
+{
+    Write(_T("app_info"), _T("app_bid"), strBid.c_str());
+}
+
+tstring InteractSetting::GetCid()
+{
+    return Read(_T("app_info"), _T("app_cid"), InteractConstant::AppConfig::APP_CID.c_str());
+}
+
+void InteractSetting::SetCid(const tstring& strCid)
+{
+    Write(_T("app_info"), _T("app_cid"), strCid.c_str());
+}
+
+tstring InteractSetting::GetAppKey()
+{
+    return Read(_T("app_info"), _T("app_key"), InteractConstant::AppConfig::APP_KEY.c_str());
+}
+void InteractSetting::SetAppKey(const tstring& strAppKey)
+{
+    Write(_T("app_info"), _T("app_key"), strAppKey.c_str());
+}
+
+tstring InteractSetting::GetAppSecret()
+{
+    return Read(_T("app_info"), _T("app_secret"), InteractConstant::AppConfig::APP_SCREAT_KEY.c_str());
+}
+void InteractSetting::SetAppSecret(const tstring& strAppSecret)
+{
+    Write(_T("app_info"), _T("app_secret"), strAppSecret.c_str());
 }

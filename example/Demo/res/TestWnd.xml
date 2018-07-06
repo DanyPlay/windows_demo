@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="400,600" sizebox="4,4,6,6" caption="0,0,0,32" roundcorner="5,5">
+    <Font name="微软雅黑" id="0" size="14" bold="false" italic="false" default="true" />
+    <Include source="Common.xml" />
+	<VerticalLayout bordersize="1" bkcolor="#FFFFFFFF" bordercolor="#FF1B4876">有logcat
+	    <HorizontalLayout height="36" bkcolor="#FF60B7FF" bkcolor2="#FF4DA3FF">
+            <Label name="titlelb" text="360视频云" padding="4,4,4,4" textcolor="#00FFFFFF" font="0" align="left" valign="vcenter" endellipsis="true" />
+            <HorizontalLayout width="42">
+                <Button name="closebtn" width="19" height="19" padding="8,8,0,0" normalimage="file=&apos;frame_btn_close.png&apos; source=&apos;0,0,19,19&apos; &apos;" hotimage="file=&apos;frame_btn_close.png&apos; source=&apos;19,0,38,19&apos;" pushedimage="file=&apos;frame_btn_close.png&apos; source=&apos;38,0,57,19&apos;" disabledimage="file=&apos;frame_btn_close.png&apos; source=&apos;57,0,76,19&apos;" />
+            </HorizontalLayout>
+        </HorizontalLayout>
+		<VerticalLayout width="470" padding="1,1,1,1">
+			<Button name="SetCloudControlRole" text="SetCloudControlRole" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Button name="MuteAllRemoteVideoStreams" text="MuteAllRemoteVideoStreams" width="250" height="30" font="0"padding="10,5,10,5" />
+			<Button name="MuteAllRemoteAudioStreams" text="MuteAllRemoteAudioStreams" width="250" height="30" font="0" padding="10,5,10,5"/>
+			<Button name="EnableAudioVolumeIndication" text="EnableAudioVolumeIndication" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Button name="EnableDualStreamMode" text="EnableDualStreamMode)" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Button name="SetLowStreamVideoProfile" text="SetLowStreamVideoProfile" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Button name="SetRemoteVideoStream" text="SetRemoteVideoStream" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Button name="EnableAudio" text="EnableAudio" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Button name="DisableAudio" text="DisableAudio" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Button name="EnableVideo" text="EnableVideo" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Button name="DisableVideo" text="DisableVideo" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Button name="ClearVideoCompositingLayout" text="ClearVideoCompositingLayout" width="250" height="30" font="0" padding="10,5,10,5" />
+			<Label name="lb_text_info" text=""  width="250" height="30" font="0" align="left" valign="vcenter" padding="10,5,10,5" />
+		</VerticalLayout>
+    </VerticalLayout>
+</Window>

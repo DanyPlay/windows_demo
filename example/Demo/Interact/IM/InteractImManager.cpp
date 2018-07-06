@@ -321,7 +321,7 @@ void InteractImManager::SendCommandMessage(const tstring& targetId, ImConstant::
     int messageId = 0;
 
 
-    m_RongCloudApi.sendMessage(STR2A(targetId).c_str(), 1, 2, "RC:CmdMsg", Util::Encode::ASCIIToWide(info).c_str(), "", " ", messageId, [](const char* json_str)
+    m_RongCloudApi.sendMessage(STR2A(targetId).c_str(), conversationType, 1, "RC:CmdMsg", Util::Encode::ASCIIToWide(info).c_str(), "", " ", messageId, [](const char* json_str)
     {
         InteractImManager::GetInstance().PostIMMessage((WPARAM)InteractImManager::IM_TYPE_SEND_MESSAGE_CALLBACK, (LPARAM)strdup(json_str));
     });

@@ -21,6 +21,7 @@ public:
     CControlUI* FindSubControl(LPCTSTR pstrName) const;
     void SetNotifyWnd(HWND hwnd);
     void SetTag(int tag);
+    void Update();
 
 public:
     virtual LPCTSTR GetWindowClassName() const { return _T("VideoWnd"); }

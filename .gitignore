@@ -1,40 +1,37 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
+*.sublime-project
+*.sublime-workspace
+*.svn
+*.mk
+*.orig
+*.ncb
+*.tmp
+*.pyc
+*.orig
+*.ipch
+*.suo
+*.user
+*.bak
+*.aps
 *.sdf
 *.opensdf
+*~
+.metadata
+.project
+.cproject
+.tags
+.tags_sorted_by_file
+*.props
+*.targets
+*.landmines
+*.orig
+*.log
+*.aps
 *.suo
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+*.ncb
+*.user
+*.obj
+*.pdb
+Thumbs.db
 
 Debug
 Release
-ipch
-

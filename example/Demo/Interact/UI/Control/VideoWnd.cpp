@@ -113,4 +113,10 @@ void CVideoWnd::SetTag(int tag)
     m_wndLayer.SetTag(tag);
 }
 
+void CVideoWnd::Update()
+{
+    ::InvalidateRect(GetHWND(), NULL, TRUE);
+    ::UpdateWindow(GetHWND());
+}
+
 

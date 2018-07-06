@@ -80,9 +80,13 @@ tstring InteractGlobalManager::CreateMergeRtmp(const tstring& strStreamId)
 
 tstring InteractGlobalManager::GetDeviceId()
 {
-    std::string deviceId = Util::OS::GetTheFirstMac();
-    std::string ret = CMD5Checksum::GetMD5((BYTE*)deviceId.c_str(), deviceId.size());
-    return ConvertString(ret);
+    if (m_strDeviceId.size() == 0) {
+        std::string deviceId = Util::OS::GetTheFirstMac();
+        std::string ret = CMD5Checksum::GetMD5((BYTE*)deviceId.c_str(), deviceId.size());
+        m_strDeviceId =  ConvertString(ret);
+    }
+
+    return m_strDeviceId;
 }
 
 tstring InteractGlobalManager::GetAppKey()

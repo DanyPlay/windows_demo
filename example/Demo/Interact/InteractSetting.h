@@ -42,6 +42,19 @@ public:
     int GetBitrate(InteractConstant::USER_IDENTITY enIdentity, int nDefault = 800);
     void SetBitrate(InteractConstant::USER_IDENTITY enIdentity, int nBitrate);
 
+public:
+    tstring GetBid();
+    void SetBid(const tstring& strBid);
+
+    tstring GetCid();
+    void SetCid(const tstring& strCid);
+
+    tstring GetAppKey();
+    void SetAppKey(const tstring& strAppKey);
+
+    tstring GetAppSecret();
+    void SetAppSecret(const tstring& strAppSecret);
+
 private:
     tstring m_strFilePath;
 };

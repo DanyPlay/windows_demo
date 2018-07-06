@@ -6,7 +6,8 @@
         <HorizontalLayout height="54" bkcolor="#FF60B7FF" bkcolor2="#FF4DA3FF">
             <Control width="117" height="18" padding="24,18,0,0" bkimage="logo.png" />
             <HorizontalLayout height="54" padding="50,1,0,0" />
-            <HorizontalLayout width="46" height="54" padding="0,0,20,0">
+            <HorizontalLayout width="69" height="54" padding="0,0,20,0">
+				<Button name="morebtn" width="19" height="19" padding="0,18,0,0" normalimage="" hotimage="" pushedimage="" disabledimage="" />
                 <Button name="minbtn" width="19" height="19" padding="0,18,0,0" normalimage="file=&apos;frame_btn_min.png&apos; source=&apos;0,0,19,19&apos;" hotimage="file=&apos;frame_btn_min.png&apos; source=&apos;19,0,38,19&apos;" pushedimage="file=&apos;frame_btn_min.png&apos; source=&apos;38,0,57,19&apos;" disabledimage="file=&apos;frame_btn_min.png&apos; source=&apos;57,0,76,19&apos;" />
                 <Button name="closebtn" width="19" height="19" padding="8,18,0,0" normalimage="file=&apos;frame_btn_close.png&apos; source=&apos;0,0,19,19&apos; &apos;" hotimage="file=&apos;frame_btn_close.png&apos; source=&apos;19,0,38,19&apos;" pushedimage="file=&apos;frame_btn_close.png&apos; source=&apos;38,0,57,19&apos;" disabledimage="file=&apos;frame_btn_close.png&apos; source=&apos;57,0,76,19&apos;" />
             </HorizontalLayout>

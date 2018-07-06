@@ -13,7 +13,8 @@
         <File Name="VideoLayer.xml" />
         <File Name="InteractInfoPanel.xml" />
         <File Name="RoomItem.xml" />
-		<File Name="AudioItem.xml" />
+        <File Name="AudioItem.xml" />
+        <File Name="TestWnd.xml" />
     </Directory>
     <Directory Name="Common">
         <File Name="SysComand.xml" />

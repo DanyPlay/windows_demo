@@ -127,6 +127,8 @@ struct InteractRoomModel
     int maxNum;
     int roomLifeType;
     tstring createTime;
+    InteractConstant::USER_IDENTITY userIdentity;
+
 
     std::vector<InteractUserModel> userList;
 
@@ -135,6 +137,7 @@ struct InteractRoomModel
         talkType = 0;
         maxNum = 0;
         roomLifeType = 0;
+        userIdentity = InteractConstant::USER_IDENTITY_AUDIENCE;
     }
 
 };
@@ -152,13 +155,13 @@ typedef struct InteractStats
     QHVC::INTERACT::LocalVideoStats localVideoStatus;
     std::map<std::string, QHVC::INTERACT::RemoteVideoStats> mapRemoteVideoStatus;
 
-    int rxQuality;                       //发送的质量
-    int txQuality;                       //接收的质量
+    int txQuality;                       //发送的质量
+    int rxQuality;                       //接收的质量
 
     InteractStats()
     {
-        rxQuality = 0;
         txQuality = 0;
+        rxQuality = 0;
     }
 } InteractStats;
 

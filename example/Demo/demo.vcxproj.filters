@@ -126,6 +126,12 @@
     <ClCompile Include="Interact\UI\Toast.cpp">
       <Filter>Interact\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Interact\UI\InteractTestDlg.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Interact\DebugSetting.cpp">
+      <Filter>Interact</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -342,6 +348,12 @@
       <Filter>Interact\UI</Filter>
     </ClInclude>
     <ClInclude Include="Interact\InteractConfig.h">
+      <Filter>Interact</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractTestDlg.h">
+      <Filter>Interact\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\DebugSetting.h">
       <Filter>Interact</Filter>
     </ClInclude>
   </ItemGroup>

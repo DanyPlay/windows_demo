@@ -9,6 +9,8 @@
 #include <sstream>
 #include "Toast.h"
 #include <Dbt.h>
+#include "InteractTestDlg.h"
+#include "../DebugSetting.h"
 
 #ifdef UNICODE
 #define tstringstream  std::wstringstream
@@ -500,6 +502,10 @@ LRESULT CInteractAnchorDlg::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 
     if (_tcsicmp(userId.c_str(), mInteractRoomModel.bindRoleId.c_str()) == 0) {
         // 创建房间的主播，不加入房间也行
+        mInteractRoomModel.userIdentity = InteractConstant::USER_IDENTITY_ANCHOR;
+        if (mUserIdentity != InteractConstant::USER_IDENTITY_ANCHOR) {
+            mUserIdentity = InteractConstant::USER_IDENTITY_ANCHOR;
+        }
         //InteractServerApi::GetInstance().JoinRoom(userId, mInteractRoomModel.roomId, InteractConstant::USER_IDENTITY_AUDIENCE);
         InteractServerApiRet ret;
         OnServerApiJoinRoomResult(ret, mInteractRoomModel);
@@ -619,6 +625,12 @@ void CInteractAnchorDlg::OnClick(TNotifyUI& msg)
         CCheckBoxUI *pCheck = static_cast<CCheckBoxUI*>(msg.pSender);
         PostMessage(WM_TOOLBAR_MUTE_MICRO, (WPARAM)tag, (LPARAM)(pCheck ? !pCheck->IsSelected() : false));
     }
+    else if (sCtrlName == _T("morebtn")) {
+        CInteractTestDlg dlg;
+        dlg.SetInteractRoomModel(mInteractRoomModel);
+        dlg.SetAnchorIDList(m_vectVideoUId);
+        dlg.DoModal();
+    }
 
     Super::OnClick(msg);
 }
@@ -635,6 +647,8 @@ void CInteractAnchorDlg::OnServerApiJoinRoomResult(const InteractServerApiRet& r
     AddLog(ostr.str());
 
     if (ret.errCode == 0) {
+
+        mUserIdentity = interactRoomModel.userIdentity;
         // 加入demo的房间后
         // 1、加入IM房间
         JoinImRoom();
@@ -779,13 +793,7 @@ void CInteractAnchorDlg::OnServerApiUserHeartResult(const InteractServerApiRet& 
 
     // 返回10001表示房间不在了，退出
     if (ret.errCode == 10001) {
-        if (m_bShowExitDailog) {
-            return;
-        }
-
-        m_bShowExitDailog = true;
-        DuiMessageBox(m_hWnd, _T("主播已掉线！"), INTERACT_TITLE, MB_OK);
-        m_bShowExitDailog = false;
+        DuiShowToast(InteractGlobalManager::GetInstance().GetMainWindow(), _T("主播已掉线！"), 2);
         CButtonUI* pbtnClose = static_cast<CButtonUI*>(FindControl(_T("closebtn")));
         if (pbtnClose != NULL) {
             pbtnClose->Activate();
@@ -985,6 +993,9 @@ LRESULT CInteractAnchorDlg::OnLoadEngineSuccess(UINT uMsg, WPARAM wParam, LPARAM
             QHVC::INTERACT::QHVCInteract::StartPreview();
         }
     }
+    else {
+        QHVC::INTERACT::QHVCInteract::SetClientRole(QHVC::INTERACT::CLIENT_ROLE_AUDIENCE);
+    }
 
     //注意：设置的信息会作为加入频道的参数，
     //更新合流信息
@@ -1093,6 +1104,11 @@ LRESULT CInteractAnchorDlg::OnChangeClientRoleSuccess(UINT uMsg, WPARAM wParam, 
     }
     else {
         RemoveUIdFromList(STR2A(userId));
+
+        QHVC::INTERACT::QHVCInteract::StopPreview();
+        // 注意：停止预览需要SetupLocalVideo为空，否则刷新可能有问题
+        QHVC::INTERACT::QHVCInteract::SetupLocalVideo(NULL, QHVC::INTERACT::RENDER_MODE_FIT, STR2A(userId).c_str());
+
         if (!IsAudioMode()) {
             UpdateVideoList();
         }
@@ -1101,12 +1117,9 @@ LRESULT CInteractAnchorDlg::OnChangeClientRoleSuccess(UINT uMsg, WPARAM wParam, 
         }
 
         m_pInfoPanel->EnableJoin(true);
-
-        QHVC::INTERACT::QHVCInteract::StopPreview();
     }
+    DelayRefresh(200);
 
-    RefreshUserList();
-    RefreshRoomModel();
     return 0;
 }
 
@@ -1129,6 +1142,12 @@ LRESULT CInteractAnchorDlg::OnConnectionLost(UINT uMsg, WPARAM wParam, LPARAM lP
     INTERACT_COMMON_PARAM* lpData = (INTERACT_COMMON_PARAM*)wParam;
     if (lpData) {
         delete lpData;
+    }
+
+    DuiShowToast(InteractGlobalManager::GetInstance().GetMainWindow(), _T("连接断开！"), 2);
+    CButtonUI* pbtnClose = static_cast<CButtonUI*>(FindControl(_T("closebtn")));
+    if (pbtnClose != NULL) {
+        pbtnClose->Activate();
     }
 
     return 0;
@@ -1392,7 +1411,7 @@ LRESULT CInteractAnchorDlg::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM
 
 LRESULT CInteractAnchorDlg::OnTimer(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-    if (wParam == TIMER_ID_HEART) {
+    if (wParam == TIMER_ID_HEART && m_bJoinChannelSuccess) {
         tstring userId = InteractGlobalManager::GetInstance().GetInteractUserId();
         InteractServerApi::GetInstance().UserHeart(userId, mInteractRoomModel.roomId);
 
@@ -1432,65 +1451,59 @@ void CInteractAnchorDlg::UpdateMixStreamInfo()
     }
 
     QHVC::INTERACT::MixStreamConfig* pMixStreamConfig = new QHVC::INTERACT::MixStreamConfig();
-    pMixStreamConfig->canvasWidth = 510;
-    pMixStreamConfig->canvasHeight = 646;
+    pMixStreamConfig->canvasWidth = DebugSetting::GetInstance().GetMixIntValue(_T("canvas_width"), 510);
+    pMixStreamConfig->canvasHeight = DebugSetting::GetInstance().GetMixIntValue(_T("canvas_height"), 646);
     strcpy(pMixStreamConfig->mixStreamAddr, STR2A(m_strMergeRtmp).c_str());
-    pMixStreamConfig->mIframeInterval = 2;
-    pMixStreamConfig->videoBitrate = 800;
+    pMixStreamConfig->mIframeInterval = DebugSetting::GetInstance().GetMixIntValue(_T("i_frame_interval"), 2);
+    pMixStreamConfig->videoBitrate = DebugSetting::GetInstance().GetMixIntValue(_T("video_bitrate"), 800);
 
     QHVC::INTERACT::MixStreamRegion* pMixStreamRegion = new QHVC::INTERACT::MixStreamRegion[10];
     for (int i = 0; i < (int)m_vectVideoUId.size(); i++) {
         pMixStreamRegion->zOrder = i + 1;
         if (i == 0) {
-            pMixStreamRegion[i].x = 0;
-            pMixStreamRegion[i].y = 0;
-            pMixStreamRegion[i].width = 341;
-            pMixStreamRegion[i].height = 430;
+            pMixStreamRegion[i].x = DebugSetting::GetInstance().GetMixIntValue(_T("region_x1"), 0);
+            pMixStreamRegion[i].y = DebugSetting::GetInstance().GetMixIntValue(_T("region_y1"), 0);
+            pMixStreamRegion[i].width = DebugSetting::GetInstance().GetMixIntValue(_T("region_w1"), 341);
+            pMixStreamRegion[i].height = DebugSetting::GetInstance().GetMixIntValue(_T("region_h1"), 430);
         }
         else if (i == 1) {
-            pMixStreamRegion[i].x = 341;
-            pMixStreamRegion[i].y = 0;
-            pMixStreamRegion[i].width = 170;
-            pMixStreamRegion[i].height = 215;
+            pMixStreamRegion[i].x = DebugSetting::GetInstance().GetMixIntValue(_T("region_x2"), 341);
+            pMixStreamRegion[i].y = DebugSetting::GetInstance().GetMixIntValue(_T("region_y2"), 0);
+            pMixStreamRegion[i].width = DebugSetting::GetInstance().GetMixIntValue(_T("region_w2"), 170);
+            pMixStreamRegion[i].height = DebugSetting::GetInstance().GetMixIntValue(_T("region_h2"), 215);
         }
         else if (i == 2) {
-            pMixStreamRegion[i].x = 341;
-            pMixStreamRegion[i].y = 170;
-            pMixStreamRegion[i].width = 170;
-            pMixStreamRegion[i].height = 215;
+            pMixStreamRegion[i].x = DebugSetting::GetInstance().GetMixIntValue(_T("region_x3"), 341);
+            pMixStreamRegion[i].y = DebugSetting::GetInstance().GetMixIntValue(_T("region_y3"), 170);
+            pMixStreamRegion[i].width = DebugSetting::GetInstance().GetMixIntValue(_T("region_w3"), 170);
+            pMixStreamRegion[i].height = DebugSetting::GetInstance().GetMixIntValue(_T("region_h3"), 215);
         }
         else if (i == 3) {
-            pMixStreamRegion[i].x = 341;
-            pMixStreamRegion[i].y = 170;
-            pMixStreamRegion[i].width = 170;
-            pMixStreamRegion[i].height = 215;
-        }
-        else if (i == 4) {
-            pMixStreamRegion[i].x = 0;
-            pMixStreamRegion[i].y = 340;
-            pMixStreamRegion[i].width = 170;
-            pMixStreamRegion[i].height = 215;
+            pMixStreamRegion[i].x = DebugSetting::GetInstance().GetMixIntValue(_T("region_x4"), 0);
+            pMixStreamRegion[i].y = DebugSetting::GetInstance().GetMixIntValue(_T("region_y4"), 340);
+            pMixStreamRegion[i].width = DebugSetting::GetInstance().GetMixIntValue(_T("region_w4"), 170);
+            pMixStreamRegion[i].height = DebugSetting::GetInstance().GetMixIntValue(_T("region_h4"), 215);
 
         }
+        else if (i == 4) {
+            pMixStreamRegion[i].x = DebugSetting::GetInstance().GetMixIntValue(_T("region_x5"), 215);
+            pMixStreamRegion[i].y = DebugSetting::GetInstance().GetMixIntValue(_T("region_y5"), 340);
+            pMixStreamRegion[i].width = DebugSetting::GetInstance().GetMixIntValue(_T("region_w5"), 170);
+            pMixStreamRegion[i].height = DebugSetting::GetInstance().GetMixIntValue(_T("region_h5"), 215);
+        }
         else if (i == 5) {
-            pMixStreamRegion[i].x = 215;
-            pMixStreamRegion[i].y = 340;
-            pMixStreamRegion[i].width = 170;
-            pMixStreamRegion[i].height = 215;
+            pMixStreamRegion[i].x = DebugSetting::GetInstance().GetMixIntValue(_T("region_x6"), 430);
+            pMixStreamRegion[i].y = DebugSetting::GetInstance().GetMixIntValue(_T("region_y6"), 340);
+            pMixStreamRegion[i].width = DebugSetting::GetInstance().GetMixIntValue(_T("region_w6"), 170);
+            pMixStreamRegion[i].height = DebugSetting::GetInstance().GetMixIntValue(_T("region_h6"), 215);
         }
-        else if (i == 6) {
-            pMixStreamRegion[i].x = 430;
-            pMixStreamRegion[i].y = 340;
-            pMixStreamRegion[i].width = 170;
-            pMixStreamRegion[i].height = 215;;
-        }
-        pMixStreamRegion[i].alpha = 1;
-        pMixStreamRegion[i].renderMode = QHVC::INTERACT::RENDER_MODE_FIT;
+        pMixStreamRegion[i].alpha = DebugSetting::GetInstance().GetMixIntValue(_T("alpha"), 1);
+        pMixStreamRegion[i].renderMode = DebugSetting::GetInstance().GetMixIntValue(_T("render_mode"), QHVC::INTERACT::RENDER_MODE_FIT);
         strcpy(pMixStreamRegion[i].userID, m_vectVideoUId[i].c_str());
     }
 
 
-    QHVC::INTERACT::QHVCInteract::SetMixStreamInfo(pMixStreamConfig, QHVC::INTERACT::STREAM_LIFE_CYCLE_BIND_USER);
+    QHVC::INTERACT::QHVCInteract::SetMixStreamInfo(pMixStreamConfig, QHVC::INTERACT::STREAM_LIFE_CYCLE_BIND_ROOM);
     QHVC::INTERACT::QHVCInteract::SetVideoCompositingLayout(pMixStreamRegion, m_vectVideoUId.size());
 
     delete pMixStreamConfig;
@@ -1527,20 +1540,21 @@ void CInteractAnchorDlg::UpdateVideoList()
                 if (pControl != NULL && pControl->GetHWND() != NULL && ::IsWindow(pControl->GetHWND())) {
                     if (strcmp(myUserId.c_str(), m_vectVideoUId[i].c_str()) == 0) {
                         // 本地视频需要在StartPreview前设置才有效
-                        QHVC::INTERACT::QHVCInteract::SetLocalRenderMode(QHVC::INTERACT::RENDER_MODE_FIT);
-                        QHVC::INTERACT::QHVCInteract::SetupLocalVideo(pControl->GetHWND(), QHVC::INTERACT::RENDER_MODE_FIT, m_vectVideoUId[i].c_str());
+                        QHVC::INTERACT::RENDER_MODE renderMode = DebugSetting::GetInstance().GetLocalRenderMode();
+                        QHVC::INTERACT::QHVCInteract::SetLocalRenderMode(renderMode);
+                        QHVC::INTERACT::QHVCInteract::SetupLocalVideo(pControl->GetHWND(), renderMode, m_vectVideoUId[i].c_str());
                     }
                     else {
                         // 远程视频需要在收到第一帧onFirstRemoteVideoDecoded后设置才有效
-                        QHVC::INTERACT::QHVCInteract::SetRemoteRenderMode(m_vectVideoUId[i].c_str(), QHVC::INTERACT::RENDER_MODE_FIT);
-                        QHVC::INTERACT::QHVCInteract::SetupRemoteVideo(pControl->GetHWND(), QHVC::INTERACT::RENDER_MODE_FIT, m_vectVideoUId[i].c_str(), "");
+                        QHVC::INTERACT::RENDER_MODE renderMode = DebugSetting::GetInstance().GetRemoteRenderMode();
+                        QHVC::INTERACT::QHVCInteract::SetRemoteRenderMode(m_vectVideoUId[i].c_str(), renderMode);
+                        QHVC::INTERACT::QHVCInteract::SetupRemoteVideo(pControl->GetHWND(), renderMode, m_vectVideoUId[i].c_str(), "");
                     }
                 }
 
             }
 
-            ::InvalidateRect(m_vectVideoWnd[i]->GetHWND(), NULL, TRUE);
-            ::UpdateWindow(m_vectVideoWnd[i]->GetHWND());
+            pItem->Update();
         }
     }
 
@@ -1943,8 +1957,15 @@ LRESULT CInteractAnchorDlg::OnToolbarKickoutGuest(UINT uMsg, WPARAM wParam, LPAR
 {
     int tag = (int)wParam;
     if (tag >= 0 && tag < m_vectVideoUId.size()) {
-        InteractImManager::GetInstance().SendCommand(STR2T(m_vectVideoUId[tag]), ImConstant::CMD_ANCHOR_KICKOUT_GUEST, _T(""));
-        QHVC::INTERACT::QHVCInteract::RemoveRemoteVideo("", m_vectVideoUId[tag].c_str());
+        std::string myUserId = STR2A(InteractGlobalManager::GetInstance().GetInteractUserId());
+        std::string uid = m_vectVideoUId[tag];
+        InteractImManager::GetInstance().SendCommand(STR2T(uid), ImConstant::CMD_ANCHOR_KICKOUT_GUEST, _T(""));
+        if (strcmp(myUserId.c_str(), uid.c_str()) != 0) {
+            QHVC::INTERACT::QHVCInteract::RemoveRemoteVideo("", m_vectVideoUId[tag].c_str());
+        }
+        else {
+            QHVC::INTERACT::QHVCInteract::SetupLocalVideo(NULL, QHVC::INTERACT::RENDER_MODE_FIT, uid.c_str());
+        }
         DelayRefresh(200);
     }
 
