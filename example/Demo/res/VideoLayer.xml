@@ -15,6 +15,10 @@
                     <CheckBox name="chk_micro" width="18" height="18" normalimage="btn_micro_enable.png" selectedimage="btn_micro_disable.png" />
                     <Control height="10" />
                     <CheckBox name="chk_video" width="18" height="18" normalimage="btn_video_enable.png" selectedimage="btn_video_disable.png" />
+                    <Control height="10" />
+                    <CheckBox name="chk_screen" width="18" height="18" normalimage="btn_screen_disable.png" selectedimage="btn_screen_enable.png" />
+                    <Control height="10" />
+                    <CheckBox name="chk_audio_mixing" width="18" height="18" normalimage="btn_audio_mixing_disable.png" selectedimage="btn_audio_mixing_enable.png" />
                 </VerticalLayout>
             </VerticalLayout>
             <VerticalLayout padding="0,30,0,0" valign="vcenter">

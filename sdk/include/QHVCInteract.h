@@ -39,7 +39,7 @@ namespace QHVC
             * @param userId           用户id
             * @param sessionId        会话ID，用于标识业务会话请求，每一次完整的流程之后，该值需要重新设置
             * @param optionInfo       可选字典，使用json串。若需旁路直播功能等可通过该字典设置，如果业务准备使用视频云的直播服务，
-            *                         可以通过applyforBypassLiveAddress接口申请推流服务； 
+            *                         可以通过applyforBypassLiveAddress接口申请推流服务；
             *                         例如: {"push_addr":"xxx", "pull_addr";"xxxx"},具体参数参见
             *                         {@link QHVC#INTERACT#ENGINE_OPTION}定义。
             * @param interactCallBack 回调
@@ -156,6 +156,19 @@ namespace QHVC
             QHVC_API int DisableAudio();
 
             /**
+            * 设置音质
+            * 该方法用于设置音频采样率、编码方式、声道数、编码码率，以及使用场景。
+            * 注：1. 该方法需要在 joinChannel 之前设置好，joinChannel 之后设置不生效
+            *     2. 通信模式下，该方法设置 profile 生效，设置 scenario 不生效
+            *     3. 通信和直播模式下，音质（码率）会有网络自适应的调整，通过该方法设置的是一个最高码率
+            *
+            * @param profile 音频采样率、编码方式、声道数及编码码率
+            * @param scenario 音频应用场景
+            * @return 0 成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int SetAudioProfile(AUDIO_PROFILE profile, AUDIO_SCENARIO scenario);
+
+            /**
             * 设置一些SDK的特殊参数
             *
             * @param options 必须是json格式
@@ -237,6 +250,14 @@ namespace QHVC
             QHVC_API int SetLocalRenderMode(RENDER_MODE mode);
 
             /**
+            * 该方法设置本地视频镜像，须在开启本地预览前设置。如果在开启预览后设置，需要重新开启预览才能生效。
+            * 在SetupRemoteVideo前调用
+            * @param mode 镜像模式类型。见｛@link QHVC#INTERACT#VIDEO_MIRROR_MODE｝
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int SetLocalVideoMirrorMode(VIDEO_MIRROR_MODE mode);
+
+            /**
             * 该方法设置远端视频显示模式。应用程序可以多次调用此方法更改显示模式。
             *
             * @param uid  用户 ID
@@ -248,9 +269,10 @@ namespace QHVC
             /**
             * 该方法设置视频编码属性(Profile)。每个属性对应一套视频参数，如分辨率、帧率、码率等。当设备的摄像头
             * 不支持指定的分辨率时， SDK 会自动选择一个合适的摄像头分辨率，但是编码分辨率仍然用 setVideoProfile 指定的。
-            * 注：1. 应在调用 joinChannel/startPreview 前设置视频属性。
-            * 2. 该方法仅设置编码器编出的码流属性，可能跟最终显示的属性不一致，例如编码码流分辨率为 640x480，码流
-            * 的旋转属性为 90 度，则显示出来的分辨率为竖屏模式。
+            * 注：
+            *       1. 应在调用 joinChannel/startPreview 前设置视频属性。
+            *       2. 该方法仅设置编码器编出的码流属性，可能跟最终显示的属性不一致，例如编码码流分辨率为 640x480，码流
+            *       的旋转属性为 90 度，则显示出来的分辨率为竖屏模式。
             *
             * @param profile            视频属性(Profile)。详见QHVCInteractConstant.VideoProfile中的定义。
             * @param swapWidthAndHeight 是否交换宽和高。    true：交换宽和高  false：不交换宽和高(默认)
@@ -384,7 +406,7 @@ namespace QHVC
             *
             * @param mixStreamConfig 合流参数
             * @param streamLifeCycle 合流任务的生命周期，可以绑定主播或绑定房间
-            * @return 0 成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
             */
             QHVC_API int SetMixStreamInfo(const MixStreamConfig* mixStreamConfig, STREAM_LIFE_CYCLE streamLifeCycle);
 
@@ -395,18 +417,250 @@ namespace QHVC
             *
             * @param mixStreamInfos 布局信息，请确保设置所有的视频流，包括主播的视频流。
             * @param count mixStreamInfos数组的大小。
-            * @return 0:  方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
             */
             QHVC_API int SetVideoCompositingLayout(const MixStreamRegion* mixStreamInfos, int count);
 
             /**
             * 取消合流布局
             *
-            * @return 0:  方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
             */
             QHVC_API int ClearVideoCompositingLayout();
 
 #pragma endregion 合流相关
+
+#pragma region 自渲染，自采集相关
+            /**
+            * 设置本地视频外部渲染（即业务端渲染）的视频数据回调接口
+            * @param pCallback 本地视频回调的callback，可以通过处理回调，调整本地采集视频的数据，如实现美颜、自渲染，数据替换（自采集）等｛@link QHVC#INTERACT#IQHVCInteractLocalVideoRenderCallback｝
+            *
+            * @return 0:  方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+
+            QHVC_API int SetLocalVideoRenderCallback(IQHVCInteractLocalVideoRenderCallback* pCallback);
+
+            /**
+            * 设置远端视频外部渲染（即业务端渲染）的视频回调接口
+            * @param pCallback 远端视频回调的callback， 可以通过处理回调，实现自渲染等｛@link QHVC#INTERACT#IQHVCInteractRemoteVideoRenderCallback｝
+            *
+            * @return 0:  方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+
+            QHVC_API int SetRemoteVideoRenderCallback(IQHVCInteractRemoteVideoRenderCallback* pCallback);
+
+            /**
+            * 该方法设置音频数据对外回调的callback
+            * @param pCallback 声音数据回调｛@link QHVC#INTERACT#IQHVCInteractAudioFrameCallback｝
+            *
+            * @return 0:  方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+
+            QHVC_API int SetAudioFrameCallback(IQHVCInteractAudioFrameCallback* pCallback);
+#pragma endregion 自渲染，自采集相关
+
+#pragma region 视频高级接口-屏幕捕获
+
+            /**
+            * 开启屏幕共享，该方法共享整个屏幕，指定窗口，或指定区域:
+            *     共享整个屏幕: 将 hWnd 设为 0，且将 rect 设为 null
+            *     共享指定窗口: 将 hWnd 设为非 0，每个窗口都有一个非 0 的 hWnd
+            *     共享指定区域: 将 hWnd 设为 0，且将 rect 设为非 null。这里的 共享指定区域 指的是共享整个屏幕里的某个区域，目前暂不支持共享指定窗口里的指定区域
+            *
+            * @param hWnd 窗口句柄，为空时表示整个屏幕
+            * @param captureFreq 共享屏幕的帧率，取值1~15
+            * @param rect 屏幕指定区域，仅在 hWnd=null 时有效
+            * @param bitrate 共享屏幕的码率，单位kbps，若设置为0，由SDK根据共享屏幕的分辨率及帧率计算码率
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int StartScreenCapture(HWND hWnd, int captureFreq, const RECT* rect, int bitrate = 0);
+
+            /**
+            * 停止屏幕共享
+            *
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int StopScreenCapture();
+
+            /**
+            * 更新屏幕截图区域
+            *
+            * @param rect 只有在调用 startScreenCapture() 时将 hWnd 设为 0 时，该参数才有效。当 rect 设置为 null 时, 共享整个屏幕
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int UpdateScreenCaptureRegion(const RECT *rect);
+
+#pragma endregion 视频高级接口-屏幕捕获
+
+#pragma region 音频高级接口-伴奏
+
+            /**
+            * 开始播放伴奏，指定本地音频文件来和麦克风采集的音频流进行混音或替换(用音频文件替换麦克风采集的音频流)，
+            * 可以通过参数选择是否让对方听到本地播放的音频和指定循环播放的次数
+            *
+            * @param filePath 本地音频文件路径
+            * @param loopback true 仅允许本地听到本地播放的音频
+            *                 false 允许本地和对方听到本地播放的音频
+            * @param replace true 本地播放的音频替换麦克风采集的音频
+            *                false 本地播放的音频和麦克风采集的音频进行混音
+            * @param cycle 循环播放次数，-1表示无限循环
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int StartAudioMixing(const char* filePath, bool loopback, bool replace, int cycle);
+
+            /**
+            * 停止播放伴奏
+            *
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int StopAudioMixing();
+
+            /**
+            * 暂停播放伴奏
+            *
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int PauseAudioMixing();
+
+            /**
+            * 恢复播放伴奏
+            *
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int ResumeAudioMixing();
+
+            /**
+            * 调节伴奏音量
+            *
+            * @param volume 伴奏音量，范围0-100，默认100
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int AdjustAudioMixingVolume(int volume);
+
+            /**
+            * 获取伴奏时长，单位毫秒
+            *
+            * @return 返回伴奏时长，0表示失败
+            */
+            QHVC_API int GetAudioMixingDuration();
+
+            /**
+            * 获取伴奏播放进度，单位毫秒
+            *
+            * @return 返回当前播放进度，0表示失败
+            */
+            QHVC_API int GetAudioMixingCurrentPosition();
+
+            /**
+            * 设置伴奏播放位置，单位毫秒
+            *
+            * @param position 播放位置，单位毫秒
+            * @param
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int SetAudioMixingPosition(int position);
+
+#pragma endregion
+
+#pragma region 音频高级接口-音效
+            /**
+            * 该方法获取音效的音量，范围为 [0.0, 100]。
+            * @return 音效的音量
+            */
+            QHVC_API int GetEffectsVolume();
+
+            /**
+            * 该方法设置音效的音量。
+            * @param volume 音量, 取值范围为 [0.0, 100]。 100.0为默认值
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int SetEffectsVolume(int volume);
+
+            /**
+            * 该方法实时调整指定音效的音量。
+            * @param soundId 指定音效的 ID。每个音效均有唯一的 ID
+            * @param volume 取值范围为 [0.0, 100]。 100 为默认值
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int SetVolumeOfEffect(int soundId, int volume);
+
+            /**
+            * 该方法播放指定音效。
+            * @param soundId 指定音效的 ID。每个音效均有唯一的ID。如果你已通过 preloadEffect 将音效加载至内存，确保这里设置的 soundId 与 preloadEffect 设置的 soundId 相同。
+            * @param filePath 音效文件的绝对路径
+            * @param loopCount 设置音效循环播放的次数：
+            *       0：播放音效一次
+            *       1：循环播放音效两次
+            *       -1：无限循环播放音效，直至调用 stopEffect 或 stopAllEffects 后停止
+            * @param pitch 设置音效的音调 取值范围为 [0.5, 2]。默认值为 1.0，表示不需要修改音调。取值越小，则音调越低
+            * @param pan   设置是否改变音效的空间位置。取值范围为 [-1, 1]：
+            *       0：音效出现在正前方
+            *       -1：音效出现在左边
+            *       1：音效出现在右边
+            * @param gain 设置是否改变单个音效的音量。取值范围为 [0.0, 100.0]。默认值为 100.0。取值越小，则音效的音量越低
+            * @param publish 设置是否将音效传到远端：
+            *       true：音效在本地播放的同时，会发布到云上，因此远端用户也能听到该音效
+            *       false：音效不会发布到云上，因此只能在本地听到该音效
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int PlayEffect(int soundId, const char* filePath, int loopCount, double pitch, double pan, double gain, bool publish);
+
+            /**
+            * 该方法停止播放指定音效。
+            * @param soundId  指定音效的 ID。每个音效均有唯一的 ID
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int StopEffect(int soundId);
+
+            /**
+            * 该方法停止播放所有音效。
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int StopAllEffects();
+
+            /**
+            *  预加载音效
+            *  该方法将指定音效文件(压缩的语音文件)预加载至内存。
+            * @param soundId 指定音效的 ID。每个音效均有唯一的 ID
+            * @param filePath 音效文件的绝对路径
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int PreloadEffect(int soundId, const char* filePath);
+
+            /**
+            * 该方法将指定预加载的音效从内存里释放出来。
+            * @param soundId  指定音效的 ID。每个音效均有唯一的 ID
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int UnloadEffect(int soundId);
+
+            /**
+            * 该方法暂停播放指定音效。
+            * @param soundId 指定音效的 ID。每个音效均有唯一的 ID
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int PauseEffect(int soundId);
+
+            /**
+            * 该方法暂停播放所有音效。
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int PauseAllEffects();
+
+            /**
+            * 该方法恢复播放指定音效。
+            * @param soundId 指定音效的 ID。每个音效均有唯一的ID。
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int ResumeEffect(int soundId);
+
+            /**
+            * 恢复播放所有音效。
+            * @return 0：方法调用成功，其他表示失败，见｛@link QHVC#INTERACT#ERR｝
+            */
+            QHVC_API int ResumeAllEffects();
+
+#pragma endregion
 
 #pragma region 设备相关
 

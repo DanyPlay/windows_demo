@@ -5,8 +5,8 @@
 	<VerticalLayout bordersize="1" bkcolor="#FFFFFFFF" bordercolor="#00A0A0A4">
         <HorizontalLayout height="36" bkcolor="#FF60B7FF" bkcolor2="#FF4DA3FF">
             <Label name="titlelb" text="360视频云" padding="4,4,4,4" textcolor="#00FFFFFF" font="0" align="left" valign="vcenter" endellipsis="true" />
-            <HorizontalLayout width="42">
-                <Button name="closebtn" maxheight="18" maxwidth="42" normalimage="file=&apos;frame_btn_close.bmp&apos; source=&apos;0,0,42,18&apos; mask=&apos;FFFF00FF&apos;" hotimage="file=&apos;frame_btn_close.bmp&apos; source=&apos;42,0,84,18&apos; mask=&apos;0xFFFF00FF&apos;" pushedimage="file=&apos;frame_btn_close.bmp&apos; source=&apos;84,0,126,18&apos; mask=&apos;0xFFFF00FF&apos;" disabledimage="file=&apos;frame_btn_close.bmp&apos; source=&apos;126,0,168,18&apos; mask=&apos;0xFFFF00FF&apos;" />
+            <HorizontalLayout width="42" padding="0,8,8,0" align="right">
+                <Button name="closebtn" width="19" height="19" align="right" valign="vcenter" normalimage="file=&apos;frame_btn_close.png&apos; source=&apos;0,0,19,19&apos; &apos;" hotimage="file=&apos;frame_btn_close.png&apos; source=&apos;19,0,38,19&apos;" pushedimage="file=&apos;frame_btn_close.png&apos; source=&apos;38,0,57,19&apos;" disabledimage="file=&apos;frame_btn_close.png&apos; source=&apos;57,0,76,19&apos;" />
             </HorizontalLayout>
         </HorizontalLayout>
         <HorizontalLayout height="96">

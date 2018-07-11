@@ -10,6 +10,7 @@ static std::string  HOST = "http://livedemo.vcloud.360.cn/api";
 static std::string  HOST_DEBUG = "http://k0106v.add.lfyc.qihoo.net:9908/api";
 static std::string  HOST_RELEASE = "http://livedemo.vcloud.360.cn/api";
 
+
 bool SortUserModel(const InteractUserModel &v1, const InteractUserModel &v2)//注意：本函数的参数的类型一定要与vector中元素的类型一致
 {
     return _tcsicmp(v1.createTime.c_str(), v2.createTime.c_str()) < 0;

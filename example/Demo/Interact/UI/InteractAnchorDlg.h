@@ -34,12 +34,17 @@ enum
     WM_INTERACT_ON_REMOTE_VIDEO_STATS,
     WM_INTERACT_ON_AUDIO_QUALITY,
     WM_INTERACT_ON_AUDIO_VOLUME_INDICATION,
-    WM_INTERACT_ON_AUDIO_MIXING_FINISH,
     WM_INTERACT_ON_RTC_STATS,
     WM_INTERACT_ON_NETWORK_QUALITY,
 
     WM_INTERACT_ON_AUDIO_DEVICE_CHANGE,
     WM_INTERACT_ON_VIDEO_DEVICE_CHANGE,
+
+    WM_INTERACT_ON_AUDIO_MIXING_FINISH,
+    WM_INTERACT_ON_REMOTE_AUDIO_MIXING_BEGIN,
+    WM_INTERACT_ON_REMOTE_AUDIO_MIXING_END,
+
+    WM_INTERACT_ON_AUDIO_EFFECT_END,
 };
 
 class CInteractInfoPanel;
@@ -105,6 +110,8 @@ public:
         DUI_WIN_MESSAGE_HANDLER(WM_TOOLBAR_MUTE_VIDEO, OnToolbarMuteVideo)
         DUI_WIN_MESSAGE_HANDLER(WM_TOOLBAR_MUTE_AUDIO, OnToolbarMuteAudio)
         DUI_WIN_MESSAGE_HANDLER(WM_TOOLBAR_MUTE_MICRO, OnToolbarMuteMicro)
+        DUI_WIN_MESSAGE_HANDLER(WM_TOOLBAR_SCREEN, OnToolbarScreen)
+        DUI_WIN_MESSAGE_HANDLER(WM_TOOLBAR_AUDIO_MIXING, OnToolbarAudioMixing)
 
         DUI_WIN_MESSAGE_HANDLER(WM_GUEST_ASK_JOIN, OnGuestAskJoin)
         DUI_WIN_END_MSG_MAP()
@@ -195,17 +202,21 @@ private:
     LRESULT OnRemoteVideoStats(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnAudioQuality(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnAudioVolumeIndication(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-    LRESULT OnAudioMixingFinished(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnRtcStats(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnNetworkQuality(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnAudioDeviceChange(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnVideoDeviceChange(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+    LRESULT OnAudioMixingFinished(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+    LRESULT OnRemoteAudioMixingBegin(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+    LRESULT OnRemoteAudioMixingEnd(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
     LRESULT OnToolbarShow(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnToolbarKickoutGuest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnToolbarMuteVideo(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnToolbarMuteAudio(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnToolbarMuteMicro(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+    LRESULT OnToolbarScreen(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+    LRESULT OnToolbarAudioMixing(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
     LRESULT OnGuestAskJoin(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 private:

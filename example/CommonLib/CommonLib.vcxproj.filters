@@ -43,6 +43,9 @@
     <Filter Include="tstring">
       <UniqueIdentifier>{91bc2c2e-d7d3-4606-a8e2-9d871972bf30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="rc4">
+      <UniqueIdentifier>{83c61049-89c3-4335-9f5a-488fb6d46017}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -117,6 +120,9 @@
     <ClInclude Include="string\tstring.h">
       <Filter>tstring</Filter>
     </ClInclude>
+    <ClInclude Include="rc4\rc4.h">
+      <Filter>rc4</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -154,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="Thread\AtomicBoolean.cpp">
       <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="rc4\rc4.cpp">
+      <Filter>rc4</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

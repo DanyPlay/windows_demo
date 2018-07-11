@@ -39,11 +39,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath);$(SolutionDir)/WTL91_5321_Final\Include;</IncludePath>
+    <IncludePath>$(IncludePath);$(SolutionDir)/WTL91_5321_Final\Include;$(SolutionDir)/Demo/opencv/include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(IncludePath);$(SolutionDir)/WTL91_5321_Final\Include;</IncludePath>
+    <IncludePath>$(IncludePath);$(SolutionDir)/WTL91_5321_Final\Include;$(SolutionDir)/Demo/opencv/include</IncludePath>
     <TargetName>360VideoCloud</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -82,7 +82,8 @@
     </Midl>
     <PostBuildEvent>
       <Command>xcopy /s /y $(ProjectDir)Run $(SolutionDir)$(Configuration)\
-xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
+xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\
+xcopy /s /y $(ProjectDir)\opencv\bin\$(Configuration) $(SolutionDir)$(Configuration)\</Command>
     </PostBuildEvent>
     <PreLinkEvent>
       <Command>
@@ -127,7 +128,8 @@ xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
     </Midl>
     <PostBuildEvent>
       <Command>xcopy /s /y $(ProjectDir)Run $(SolutionDir)$(Configuration)\
-xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
+xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\
+xcopy /s /y $(ProjectDir)\opencv\bin\$(Configuration) $(SolutionDir)$(Configuration)\</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -147,6 +149,7 @@ xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
     <ClCompile Include="Interact\UI\Control\videolayer.cpp" />
     <ClCompile Include="Interact\UI\Control\VideoWnd.cpp" />
     <ClCompile Include="Interact\UI\InteractAnchorDlg.cpp" />
+    <ClCompile Include="Interact\UI\InteractAudioMixingDlg.cpp" />
     <ClCompile Include="Interact\UI\InteractCreateRoomPage.cpp" />
     <ClCompile Include="Interact\UI\InteractDevicePage.cpp" />
     <ClCompile Include="Interact\UI\InteractHomePage.cpp" />
@@ -180,6 +183,7 @@ xcopy /s /y $(ProjectDir)res $(SolutionDir)$(Configuration)\Res\</Command>
     <ClInclude Include="Interact\UI\Control\VideoLayer.h" />
     <ClInclude Include="Interact\UI\Control\VideoWnd.h" />
     <ClInclude Include="Interact\UI\InteractAnchorDlg.h" />
+    <ClInclude Include="Interact\UI\InteractAudioMixingDlg.h" />
     <ClInclude Include="Interact\UI\InteractCreateRoomPage.h" />
     <ClInclude Include="Interact\UI\InteractDevicePage.h" />
     <ClInclude Include="Interact\UI\InteractHomePage.h" />

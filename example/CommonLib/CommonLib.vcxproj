@@ -97,6 +97,7 @@
     <ClInclude Include="json\writer.h" />
     <ClInclude Include="Log\Log.h" />
     <ClInclude Include="md5\md5.h" />
+    <ClInclude Include="rc4\rc4.h" />
     <ClInclude Include="SHA1\sha1.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="string\tstring.h" />
@@ -117,6 +118,7 @@
     <ClCompile Include="json\json_writer.cpp" />
     <ClCompile Include="Log\Log.cpp" />
     <ClCompile Include="md5\md5.cpp" />
+    <ClCompile Include="rc4\rc4.cpp" />
     <ClCompile Include="SHA1\sha1.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

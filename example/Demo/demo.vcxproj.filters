@@ -132,6 +132,9 @@
     <ClCompile Include="Interact\DebugSetting.cpp">
       <Filter>Interact</Filter>
     </ClCompile>
+    <ClCompile Include="Interact\UI\InteractAudioMixingDlg.cpp">
+      <Filter>Interact\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -355,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="Interact\DebugSetting.h">
       <Filter>Interact</Filter>
+    </ClInclude>
+    <ClInclude Include="Interact\UI\InteractAudioMixingDlg.h">
+      <Filter>Interact\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -277,11 +277,6 @@ namespace QHVC
             virtual void OnAudioVolumeIndication(const AudioVolumeInfo* speakers, int speakerNumber, unsigned int totalVolume) = 0;
 
             /**
-            * 伴奏播放结束回调
-            */
-            virtual void OnAudioMixingFinished() = 0;
-
-            /**
             * 统计数据回调，该回调定期上报SDK的运行状态，每2-3秒触发一次
             *
             * @param stats 通话统计信息
@@ -313,6 +308,67 @@ namespace QHVC
             * @param deviceState 视频设备状态，可用、禁用、不存在、拔出等
             */
             virtual void OnVideoDeviceStateChanged(const char* deviceId, DEVICE_STATE deviceState) = 0;
+
+            /**
+            * 伴奏播放结束
+            */
+            virtual void OnAudioMixingFinished() = 0;
+
+            /**
+            * 其他用户开始播放伴奏
+            */
+            virtual void OnRemoteAudioMixingBegin() = 0;
+
+            /**
+            * 其他用户结束播放伴奏
+            */
+            virtual void OnRemoteAudioMixingEnd() = 0;
+
+            /**
+            * 音效播放结束
+            */
+            virtual void OnAudioEffectFinished(int soundId) = 0;
+        };
+
+        class IQHVCInteractLocalVideoRenderCallback
+        {
+        public:
+            /**
+            * 本地视频数据回调。用于获得摄像头采集的图像
+            * @param videoFrame 视频数据
+            * @return true:  方法调用成功，flase表示失败
+            */
+            virtual bool OnCaptureVideoFrame(VideoFrame& videoFrame) = 0;
+        };
+
+        class IQHVCInteractRemoteVideoRenderCallback
+        {
+        public:
+            /**
+            * 远端数据回调。用于获得其他用户的视频。
+            * @param userId 用户ID
+            * @param videoFrame 视频数据
+            * @return true:  方法调用成功，flase表示失败
+            */
+            virtual bool OnRenderVideoFrame(const char* userId, VideoFrame& videoFrame) = 0;
+        };
+
+        class IQHVCInteractAudioFrameCallback
+        {
+        public:
+            /**
+            *  连麦时，本地（自己的）声音数据输出回调
+            * @param AudioFrame 音频数据
+            * @return true:  方法调用成功，flase表示失败
+            */
+            virtual bool OnRecordAudioFrame(AudioFrame& audioFrame) = 0;
+
+            /**
+            *  连麦声音数据输出回调
+            * @param AudioFrame 音频数据
+            * @return true:  方法调用成功，flase表示失败
+            */
+            virtual bool OnPlaybackAudioFrame(AudioFrame& audioFrame) = 0;
         };
     }
 }

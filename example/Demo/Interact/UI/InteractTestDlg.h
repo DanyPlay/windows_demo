@@ -3,6 +3,11 @@
 #include "../../UI/UI.h"
 #include "../ModelDef.h"
 
+class QHVCInteractLocalVideoRenderCallback;
+class QHVCInteractRemoteVideoRenderCallback;
+class QHVCInteractAudioFrameCallback;
+class CVideoWnd;
+
 class CInteractTestDlg : public CDuiDialogImpl < CInteractTestDlg >
 {
 public:
@@ -32,6 +37,8 @@ private:
     void SetTextInfo(const tstring& info, bool bValue);
     void SetTextInfo(const tstring& info);
 private:
+    virtual CControlUI* CreateControl(LPCTSTR pstrClass);
+private:
     bool m_bAllVideoMute;
     bool m_bAllAudioMute;
     bool m_bDualStreamMode;
@@ -42,4 +49,17 @@ private:
 
     InteractRoomModel mInteractRoomModel;
     std::vector<std::string> m_vectAnchorID;
+
+    QHVCInteractLocalVideoRenderCallback* m_pQHVCInteractLocalVideoRenderCallback;
+    QHVCInteractRemoteVideoRenderCallback* m_pQHVCInteractRemoteVideoRenderCallback;
+    QHVCInteractAudioFrameCallback* m_pQHVCInteractAudioFrameCallback;
+
+    CVideoWnd* m_pUserRenderWnd;
+
+    std::string m_strEffectPath1;
+    std::string m_strEffectPath2;
+    bool m_bEffect1Loaded;
+    bool m_bEffect2Loaded;
+    int  m_nEffectVolume;
+    int  m_nEffect1Volume;
 };

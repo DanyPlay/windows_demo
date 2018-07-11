@@ -12,6 +12,7 @@
         <File Name="InteractAnchorDlg.xml" />
         <File Name="VideoLayer.xml" />
         <File Name="InteractInfoPanel.xml" />
+        <File Name="InteractAudioMixingDlg.xml" />
         <File Name="RoomItem.xml" />
         <File Name="AudioItem.xml" />
         <File Name="TestWnd.xml" />

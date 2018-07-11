@@ -282,6 +282,31 @@ namespace QHVC
         };
 
         /**
+        * 音频质量参数：采样率、编码方式、声道数、编码码率
+        */
+        enum AUDIO_PROFILE
+        {
+            AUDIO_PROFILE_DEFAULT = 0,                  //默认设置：通信场景下为 1，直播场景下为 2
+            AUDIO_PROFILE_SPEECH_STANDARD = 1,          //32 KHz采样率，语音编码, 单声道，编码码率约 18 kbps
+            AUDIO_PROFILE_MUSIC_STANDARD = 2,           //48 KHz采样率，音乐编码, 单声道，编码码率约 48 kbps
+            AUDIO_PROFILE_MUSIC_STANDARD_STEREO = 3,    //48 KHz采样率，音乐编码, 双声道，编码码率约 56 kbps
+            AUDIO_PROFILE_MUSIC_HIGH_QUALITY = 4,       //48 KHz采样率，音乐编码, 单声道，编码码率约 128 kbps
+            AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO = 5,//48 KHz采样率，音乐编码, 双声道，编码码率约 192 kbps
+        };
+
+        /**
+        * 音频应用场景
+        */
+        enum AUDIO_SCENARIO {
+            AUDIO_SCENARIO_DEFAULT = 0,                 //默认设置
+            AUDIO_SCENARIO_CHATROOM_ENTERTAINMENT = 1,  //娱乐应用，需要频繁上下麦的场景
+            AUDIO_SCENARIO_EDUCATION = 2,               //教育应用，流畅度和稳定性优先
+            AUDIO_SCENARIO_GAME_STREAMING = 3,          //游戏直播应用，需要外放游戏音效也直播出去的场景
+            AUDIO_SCENARIO_SHOWROOM = 4,                //秀场应用，音质优先和更好的专业外设支持
+            AUDIO_SCENARIO_CHATROOM_GAMING = 5,         //游戏开黑
+        };
+
+        /**
         * 频道模式
         */
         enum CHANNEL_PROFILE
@@ -427,6 +452,13 @@ namespace QHVC
             RENDER_MODE_ADAPTIVE = 3, //如果自己和对方都是竖屏，或者如果自己和对方都是横屏，使用RENDER_MODE_HIDDEN；如果对方和自己一个竖屏一个横屏，则使用 RENDER_MODE_FIT
         };
 
+        enum VIDEO_MIRROR_MODE
+        {
+            VIDEO_MIRROR_MODE_AUTO = 0,//由 SDK 决定镜像模式
+            VIDEO_MIRROR_MODE_ENABLED = 1,//启用镜像模式
+            VIDEO_MIRROR_MODE_DISABLED = 2,//关闭镜像模式
+        };
+
         /**
         * 音频设备类型
         */
@@ -531,6 +563,44 @@ namespace QHVC
             const std::string PULL_ADDR = "pull_addr";
         }
 
+
+        enum VIDEO_FRAME_TYPE {
+            FRAME_TYPE_YUV420 = 0,  //YUV 420 format
+        };
+
+        /**
+        * 视频帧数据格式
+        */
+        struct VideoFrame {
+            VIDEO_FRAME_TYPE type; // 目前只能是YUV 420
+            int width;  //视频像素宽度
+            int height;  //视频像素高度
+            int yStride;  //YUV 数据中的 Y 缓冲区的行跨度
+            int uStride;  //YUV 数据中的 U 缓冲区的行跨度
+            int vStride;  //YUV 数据中的 V 缓冲区的行跨度
+            void* yBuffer;  //指向 YU V数据中的 Y 缓冲区指针的指针
+            void* uBuffer;  //指向 YU V数据中的 U 缓冲区指针的指针
+            void* vBuffer;  //指向 YU V数据中的 V 缓冲区指针的指针
+            int rotation; // 在渲染视频前设置该帧的顺时针旋转角度，目前支持 0 度，90 度，180 度，和 270 度。
+            long long renderTimeMs; //  渲染视频流的时间戳。用户在渲染视频流时需使用该时间戳同步视频流的渲染。该时间戳为渲染视频流的时间戳，不是采集视频流的时间戳。
+        };
+
+        enum AUDIO_FRAME_TYPE {
+            FRAME_TYPE_PCM16 = 0,  //PCM 16bit little endian
+        };
+
+        /**
+        * 音频帧数据格式
+        */
+        struct AudioFrame {
+            AUDIO_FRAME_TYPE type;// 目前只能是PCM 16bit 
+            int samples;  //该帧的样本数量
+            int bytesPerSample;  //每个样本的字节数: PCM (16位)含两个字节
+            int channels;  //频道数量(如果是立体声，数据是交叉的)
+            int samplesPerSec;  //采样率
+            void* buffer;  //数据缓冲区
+            long long  renderTimeMs; // 渲染音频流的时间戳。用户在进行音频流渲染时使用该时间戳同步音频流的渲染。该时间戳为渲染音频流的时间戳，不是采集音频流的时间戳。
+        };
     }
 }
 

@@ -8,7 +8,7 @@ DUI_END_MESSAGE_MAP()
 
 CVideoLayer::CVideoLayer()
 :m_hNotifyWnd(NULL)
-,m_nTag(0)
+, m_nTag(0)
 {
 }
 
@@ -47,7 +47,14 @@ void CVideoLayer::OnClick(TNotifyUI& msg)
         CCheckBoxUI *pCheck = static_cast<CCheckBoxUI*>(msg.pSender);
         ::PostMessage(m_hNotifyWnd, WM_TOOLBAR_MUTE_MICRO, (WPARAM)m_nTag, (LPARAM)(pCheck ? !pCheck->IsSelected() : false));
     }
-
+    else if (sCtrlName == _T("chk_screen")) {
+        CCheckBoxUI *pCheck = static_cast<CCheckBoxUI*>(msg.pSender);
+        ::PostMessage(m_hNotifyWnd, WM_TOOLBAR_SCREEN, (WPARAM)m_nTag, (LPARAM)(pCheck ? !pCheck->IsSelected() : false));
+    }
+    else if (sCtrlName == _T("chk_audio_mixing")) {
+        CCheckBoxUI *pCheck = static_cast<CCheckBoxUI*>(msg.pSender);
+        ::PostMessage(m_hNotifyWnd, WM_TOOLBAR_AUDIO_MIXING, (WPARAM)m_nTag, (LPARAM)(pCheck ? !pCheck->IsSelected() : false));
+    }
 
     Super::OnClick(msg);
 }

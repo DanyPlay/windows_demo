@@ -10,6 +10,7 @@
 #include "Toast.h"
 #include <Dbt.h>
 #include "InteractTestDlg.h"
+#include "InteractAudioMixingDlg.h"
 #include "../DebugSetting.h"
 
 #ifdef UNICODE
@@ -363,12 +364,6 @@ public:
         }
     }
 
-    virtual void OnAudioMixingFinished() {
-        if (IsWindow(m_hNotifyWnd)) {
-            PostMessage(m_hNotifyWnd, WM_INTERACT_ON_AUDIO_MIXING_FINISH, NULL, NULL);
-        }
-    }
-
     virtual void OnRtcStats(const QHVC::INTERACT::RtcStats& stats) {
         if (IsWindow(m_hNotifyWnd)) {
             QHVC::INTERACT::RtcStats* pStats = new QHVC::INTERACT::RtcStats;
@@ -419,6 +414,29 @@ public:
             }
 
             PostMessage(m_hNotifyWnd, WM_INTERACT_ON_VIDEO_DEVICE_CHANGE, (WPARAM)lpData, NULL);
+        }
+    }
+
+    virtual void OnAudioMixingFinished() {
+        if (IsWindow(m_hNotifyWnd)) {
+            PostMessage(m_hNotifyWnd, WM_INTERACT_ON_AUDIO_MIXING_FINISH, NULL, NULL);
+        }
+    }
+
+    virtual void OnRemoteAudioMixingBegin() {
+        if (IsWindow(m_hNotifyWnd)) {
+            PostMessage(m_hNotifyWnd, WM_INTERACT_ON_REMOTE_AUDIO_MIXING_BEGIN, NULL, NULL);
+        }
+    }
+
+    virtual void OnRemoteAudioMixingEnd() {
+        if (IsWindow(m_hNotifyWnd)) {
+            PostMessage(m_hNotifyWnd, WM_INTERACT_ON_REMOTE_AUDIO_MIXING_END, NULL, NULL);
+        }
+    }
+    virtual void OnAudioEffectFinished(int soundId) {
+        if (IsWindow(m_hNotifyWnd)) {
+            PostMessage(m_hNotifyWnd, WM_INTERACT_ON_AUDIO_EFFECT_END, (WPARAM)soundId, NULL);
         }
     }
 };
@@ -1262,9 +1280,6 @@ LRESULT CInteractAnchorDlg::OnFirstRemoteVideoDecoded(UINT uMsg, WPARAM wParam, 
         // 判断是否是语音房间
         if (!IsAudioMode()) {
             UpdateVideoList();
-
-            // 远端视频有数据了，更新合流信息
-            UpdateMixStreamInfo();
         }
 
         delete lpData;
@@ -1320,12 +1335,7 @@ LRESULT CInteractAnchorDlg::OnAudioVolumeIndication(UINT uMsg, WPARAM wParam, LP
     }
     return 0;
 }
-LRESULT CInteractAnchorDlg::OnAudioMixingFinished(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-{
-    AddLog(_T("OnAudioMixingFinished"));
 
-    return 0;
-}
 LRESULT CInteractAnchorDlg::OnRtcStats(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
     //AddLog(_T("OnRtcStats"));
@@ -1392,6 +1402,27 @@ LRESULT CInteractAnchorDlg::OnVideoDeviceChange(UINT uMsg, WPARAM wParam, LPARAM
     m_pInfoPanel->UpdateDeviceInfo();
 
     AddLog(log);
+    return 0;
+}
+
+LRESULT CInteractAnchorDlg::OnAudioMixingFinished(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+    AddLog(_T("OnAudioMixingFinished"));
+
+    return 0;
+}
+
+LRESULT CInteractAnchorDlg::OnRemoteAudioMixingBegin(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+    AddLog(_T("OnRemoteAudioMixingBegin"));
+
+    return 0;
+}
+
+LRESULT CInteractAnchorDlg::OnRemoteAudioMixingEnd(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+    AddLog(_T("OnRemoteAudioMixingEnd"));
+
     return 0;
 }
 
@@ -1542,6 +1573,7 @@ void CInteractAnchorDlg::UpdateVideoList()
                         // 本地视频需要在StartPreview前设置才有效
                         QHVC::INTERACT::RENDER_MODE renderMode = DebugSetting::GetInstance().GetLocalRenderMode();
                         QHVC::INTERACT::QHVCInteract::SetLocalRenderMode(renderMode);
+                        QHVC::INTERACT::QHVCInteract::SetLocalVideoMirrorMode(QHVC::INTERACT::VIDEO_MIRROR_MODE_DISABLED);
                         QHVC::INTERACT::QHVCInteract::SetupLocalVideo(pControl->GetHWND(), renderMode, m_vectVideoUId[i].c_str());
                     }
                     else {
@@ -1557,8 +1589,11 @@ void CInteractAnchorDlg::UpdateVideoList()
             pItem->Update();
         }
     }
-
-    m_bBroadcasterCountChange = false;
+    if (m_bBroadcasterCountChange) {
+        // 远端视频有数据了，更新合流信息
+        UpdateMixStreamInfo();
+        m_bBroadcasterCountChange = false;
+    }
 }
 
 void CInteractAnchorDlg::UpdateAudioList()
@@ -2051,6 +2086,88 @@ LRESULT CInteractAnchorDlg::OnToolbarMuteMicro(UINT uMsg, WPARAM wParam, LPARAM 
                 m_setMuteAudio.erase(it);
             }
         }
+    }
+
+    return 0;
+}
+
+LRESULT CInteractAnchorDlg::OnToolbarScreen(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+    int tag = (int)wParam;
+    bool screen = (bool)lParam;
+
+    if (tag >= 0 && tag < m_vectVideoUId.size()) {
+        std::string myUserId = STR2A(InteractGlobalManager::GetInstance().GetInteractUserId());
+
+        if (stricmp(myUserId.c_str(), m_vectVideoUId[tag].c_str()) == 0) {
+            if (screen)
+            {
+                static int flag = 0;
+                static int COUNT = 3;
+                static int BITRATE = 0;
+
+                if (flag % COUNT == 0)
+                    QHVC::INTERACT::QHVCInteract::StartScreenCapture(NULL, 15, NULL, BITRATE);
+                else if (flag % COUNT == 1)
+                {
+                    RECT rect;
+                    ::SetRect(&rect, 300, 200, 900, 400);
+                    QHVC::INTERACT::QHVCInteract::StartScreenCapture(NULL, 15, &rect, BITRATE);
+                }
+                else if (flag % COUNT == 2)
+                {
+                    HWND hWnd = ::GetConsoleWindow();
+                    if (!hWnd)
+                        hWnd = ::FindWindow(_T("Notepad++"), NULL);
+                    if (!hWnd)
+                        hWnd = m_hWnd;
+
+                    QHVC::INTERACT::QHVCInteract::StartScreenCapture(hWnd, 15, NULL, BITRATE);
+                }
+
+                flag++;
+            }
+            else
+            {
+                QHVC::INTERACT::QHVCInteract::StopScreenCapture();
+            }
+        }
+    }
+
+    return 0;
+}
+
+LRESULT CInteractAnchorDlg::OnToolbarAudioMixing(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+    int tag = (int)wParam;
+    bool audioMixing = (bool)lParam;
+
+    if (tag < 0 || tag >= m_vectVideoUId.size())
+        return 0;
+
+    std::string myUserId = STR2A(InteractGlobalManager::GetInstance().GetInteractUserId());
+    if (stricmp(myUserId.c_str(), m_vectVideoUId[tag].c_str()) != 0)
+    {
+        return 0;
+    }
+
+    if (audioMixing)
+    {
+        CInteractAudioMixingDlg dlg;
+        if (dlg.DoModal() == IDOK)
+        {
+            const CInteractAudioMixingDlg::Config* pConfig = dlg.GetConfig();
+
+            QHVC::INTERACT::QHVCInteract::StartAudioMixing(pConfig->filePath.c_str(), pConfig->loopback, pConfig->replace, pConfig->cycle);
+        }
+        else
+        {
+
+        }
+    }
+    else
+    {
+        QHVC::INTERACT::QHVCInteract::StopAudioMixing();
     }
 
     return 0;
